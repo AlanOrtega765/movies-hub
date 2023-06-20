@@ -30,7 +30,7 @@ const onSlideNext = () => swiperRef.value.$el.swiper.slideNext();
         <img
           v-if="slide.poster_path"
           class="swiper-image"
-          :src="`${config.public.apiImageUrl}/w300` + slide.poster_path"
+          :src="config.public.apiImageUrl + '/w300' + slide.poster_path"
           :alt="slide.title"
         />
         <SwipersCardImageNotFound v-else />

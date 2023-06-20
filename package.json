@@ -22,6 +22,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "date-fns": "^2.30.0",
-    "nuxt-swiper": "^1.1.0"
+    "nuxt-swiper": "^1.1.0",
+    "vue3-youtube": "^0.1.9"
   }
 }

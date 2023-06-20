@@ -46,9 +46,9 @@ const links = ref([
         <li v-for="(link, index) in links" :key="index">
           <NuxtLink
             @click="open = false"
-            class="block text-md laptop:text-base py-1 px-3 rounded brightness-75 hover:brightness-100 font-bold"
+            class="block text-md laptop:text-base py-1 px-3 rounded text-gray hover:text-just-white font-bold"
             :to="link.route"
-            exact-active-class="font-bold bg-slate-gray/30 brightness-100"
+            exact-active-class="bg-slate-gray/30 !text-just-white"            
             >{{ link.name }}</NuxtLink
           >
         </li>

@@ -24,11 +24,11 @@ const config = useRuntimeConfig();
       <picture>
         <source
           media="(max-width: 640px)"
-          :srcset="`${config.public.apiImageUrl}/w1280` + slide.backdrop_path"
+          :srcset="config.public.apiImageUrl + '/w1280' + slide.backdrop_path"
         />
         <img
           class="w-full h-full object-cover object-center"
-          :src="`${config.public.apiImageUrl}/original` + slide.backdrop_path"
+          :src="config.public.apiImageUrl + '/original' + slide.backdrop_path"
           :alt="slide.title"
         />
       </picture>
