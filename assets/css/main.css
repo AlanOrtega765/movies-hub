@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-jet-black text-just-white font-montserrat;
+  }
+}
+
+@layer components {
+  .swiper-container {
+    @apply h-[170px] mt-2 tablet:h-[180px] laptop:h-[200px] desktop:h-[220px] large-desktop:h-[280px];
+  }
+  .swiper-loading {
+    @apply flex justify-center items-center border border-just-white rounded-md h-full w-full;
+  }
+  .swiper-image {
+    @apply rounded-md w-full h-full object-fill laptop:brightness-75 laptop:hover:brightness-100;
+  }
+}

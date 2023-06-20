@@ -1,0 +1,305 @@
+<script setup lang="ts">
+interface Trending {
+  id: number;
+  title: string;
+  name: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  vote_average: number;
+  media_type: string;
+}
+interface PopularMedia {
+  id: number;
+  title: string;
+  name: string;
+  poster_path: string;
+  vote_average: number;
+}
+
+const config = useRuntimeConfig();
+
+const PROVIDERS: Record<string, number> = {
+  netflix: 8,
+  hbo_max: 384,
+  amazon_prime_video: 119,
+  crunchyroll: 283,
+  star_plus: 619,
+};
+
+const getTrendings = async () => {
+  const response = (await $fetch(
+    `${config.public.apiBaseUrl}/trending/all/week?api_key=${config.public.apiKey}&language=es-MX&page=1`
+  )) as { results: Trending[] };
+
+  if (!response || !response.results) {
+    throw new Error('Respuesta inválida');
+  }
+
+  const responseFilter = response.results.filter(
+    (trending) => trending.media_type !== 'person'
+  );
+
+  return responseFilter;
+};
+
+const getPopularMedia = async (media_type: string) => {
+  const response = (await $fetch(
+    `${config.public.apiBaseUrl}/discover/${media_type}?api_key=${config.public.apiKey}&sort_by=popularity.desc&language=es-MX&page=1`
+  )) as { results: PopularMedia[] };
+
+  if (!response || !response.results) {
+    throw new Error('Respuesta inválida');
+  }
+
+  return response.results;
+};
+
+const getPopularMediaOnStreaming = async (
+  media_type: string,
+  provider_id: number
+) => {
+  const response = (await $fetch(
+    `${config.public.apiBaseUrl}/discover/${media_type}?api_key=${config.public.apiKey}&sort_by=popularity.desc&with_watch_providers=${provider_id}&watch_region=CL&language=es-MX&page=1`
+  )) as { results: PopularMedia[] };
+
+  if (!response || !response.results) {
+    throw new Error('Respuesta inválida');
+  }
+
+  return response.results;
+};
+
+const streamingResult = async (key: string, media_type: string) => {
+  const { data } = await useLazyAsyncData(
+    key,
+    () => getPopularMediaOnStreaming(media_type, PROVIDERS[key]),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.title || result.name,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
+  );
+  return data.value;
+};
+
+const { data: trendings } = await useLazyAsyncData(
+  'trendings',
+  () => getTrendings(),
+  {
+    transform: (trendings) => {
+      return trendings.map((trending) => ({
+        id: trending.id,
+        title: trending.title || trending.name,
+        overview: trending.overview,
+        poster_path: trending.poster_path,
+        backdrop_path: trending.backdrop_path,
+        vote_average: trending.vote_average,
+        media_type: trending.media_type,
+      }));
+    },
+  }
+);
+
+const { data: popularMovies } = await useLazyAsyncData(
+  'popularMovies',
+  () => getPopularMedia('movie'),
+  {
+    transform: (movies) => {
+      return movies.map((movie) => ({
+        id: movie.id,
+        title: movie.title,
+        poster_path: movie.poster_path,
+        vote_average: movie.vote_average,
+      }));
+    },
+  }
+);
+
+const { data: popularSeries } = await useLazyAsyncData(
+  'popularSeries',
+  () => getPopularMedia('tv'),
+  {
+    transform: (series) => {
+      return series.map((serie) => ({
+        id: serie.id,
+        title: serie.name,
+        poster_path: serie.poster_path,
+        vote_average: serie.vote_average,
+      }));
+    },
+  }
+);
+
+const moviesNetflix = await streamingResult('netflix', 'movie');
+const seriesNetflix = await streamingResult('netflix', 'tv');
+const moviesHboMax = await streamingResult('hbo_max', 'movie');
+const seriesHboMax = await streamingResult('hbo_max', 'tv');
+const moviesAmazonPrimeVideo = await streamingResult(
+  'amazon_prime_video',
+  'movie'
+);
+const seriesAmazonPrimeVideo = await streamingResult(
+  'amazon_prime_video',
+  'tv'
+);
+const moviesStarPlus = await streamingResult('star_plus', 'movie');
+const seriesStarPlus = await streamingResult('star_plus', 'tv');
+const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
+</script>
+
+<template>
+  <div>
+    <SwipersLargeImageTrendingsSwiper
+      :swiper-slides="trendings?.slice(0, 10)"
+    />
+
+    <div class="flex flex-col gap-y-10 px-2 my-10">
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Tendencias
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Peliculas y Series</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardTrendingsSwiper :swiper-slides="trendings" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Populares
+          <span class="opacity-50 text-x-sm uppercase ml-2">Peliculas</span>
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardMoviesSwiper :swiper-slides="popularMovies" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Populares
+          <span class="opacity-50 text-x-sm uppercase ml-2">Series</span>
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardSeriesSwiper :swiper-slides="popularSeries" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Netflix
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Peliculas Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardMoviesSwiper :swiper-slides="moviesNetflix" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Netflix
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Series Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardSeriesSwiper :swiper-slides="seriesNetflix" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          HBO Max
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Peliculas Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardMoviesSwiper :swiper-slides="moviesHboMax" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          HBO Max
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Series Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardSeriesSwiper :swiper-slides="seriesHboMax" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Amazon Prime Video
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Peliculas Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardMoviesSwiper :swiper-slides="moviesAmazonPrimeVideo" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Amazon Prime Video
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Series Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardSeriesSwiper :swiper-slides="seriesAmazonPrimeVideo" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Star Plus
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Peliculas Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardMoviesSwiper :swiper-slides="moviesStarPlus" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Star Plus
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Series Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardSeriesSwiper :swiper-slides="seriesStarPlus" />
+        </div>
+      </section>
+      <section>
+        <h2 class="font-bold laptop:text-md">
+          Crunchyroll
+          <span class="opacity-50 text-x-sm uppercase ml-2"
+            >Series Populares</span
+          >
+        </h2>
+
+        <div class="swiper-container">
+          <SwipersCardSeriesSwiper :swiper-slides="seriesCrunchyroll" />
+        </div>
+      </section>
+    </div>
+  </div>
+</template>
