@@ -15,6 +15,7 @@ const onSlideNext = () => swiperRef.value.$el.swiper.slideNext();
 
 <template>
   <Swiper
+    ref="swiperRef"
     class="h-full group"
     :modules="[SwiperFreeMode]"
     :breakpoints="useSwiperBreakpoints"
@@ -37,9 +38,7 @@ const onSlideNext = () => swiperRef.value.$el.swiper.slideNext();
           class="absolute top-0 right-0 z-20 text-x-sm laptop:text-sm bg-jet-black/80 rounded-bl-md px-2 py-1"
         >
           <font-awesome-icon icon="star" />
-          <span class="ml-1 font-bold">{{
-            slide.vote_average
-          }}</span>
+          <span class="ml-1 font-bold">{{ slide.vote_average }}</span>
         </div>
       </NuxtLink>
     </SwiperSlide>

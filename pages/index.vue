@@ -18,7 +18,6 @@ interface PopularMedia {
 }
 
 const config = useRuntimeConfig();
-
 const PROVIDERS: Record<string, number> = {
   netflix: 8,
   hbo_max: 384,
@@ -26,6 +25,7 @@ const PROVIDERS: Record<string, number> = {
   crunchyroll: 283,
   star_plus: 619,
 };
+const loading = ref(true);
 
 const getTrendings = async () => {
   const response = (await $fetch(
@@ -70,10 +70,14 @@ const getPopularMediaOnStreaming = async (
   return response.results;
 };
 
-const streamingResult = async (key: string, media_type: string) => {
+const streamingResult = async (
+  key: string,
+  media_type: string,
+  provider: string
+) => {
   const { data } = await useLazyAsyncData(
     key,
-    () => getPopularMediaOnStreaming(media_type, PROVIDERS[key]),
+    () => getPopularMediaOnStreaming(media_type, PROVIDERS[provider]),
     {
       transform: (results) => {
         return results.map((result) => ({
@@ -136,32 +140,63 @@ const { data: popularSeries } = await useLazyAsyncData(
   }
 );
 
-const moviesNetflix = await streamingResult('netflix', 'movie');
-const seriesNetflix = await streamingResult('netflix', 'tv');
-const moviesHboMax = await streamingResult('hbo_max', 'movie');
-const seriesHboMax = await streamingResult('hbo_max', 'tv');
+const moviesNetflix = await streamingResult(
+  'moviesNetflix',
+  'movie',
+  'netflix'
+);
+const seriesNetflix = await streamingResult('seriesNetflix', 'tv', 'netflix');
+const moviesHboMax = await streamingResult('moviesHboMax', 'movie', 'hbo_max');
+const seriesHboMax = await streamingResult('seriesHboMax', 'tv', 'hbo_max');
 const moviesAmazonPrimeVideo = await streamingResult(
-  'amazon_prime_video',
-  'movie'
+  'moviesAmazonPrimeVideo',
+  'movie',
+  'amazon_prime_video'
 );
 const seriesAmazonPrimeVideo = await streamingResult(
-  'amazon_prime_video',
-  'tv'
+  'seriesAmazonPrimeVideo',
+  'tv',
+  'amazon_prime_video'
 );
-const moviesStarPlus = await streamingResult('star_plus', 'movie');
-const seriesStarPlus = await streamingResult('star_plus', 'tv');
-const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
+const moviesStarPlus = await streamingResult(
+  'moviesStarPlus',
+  'movie',
+  'star_plus'
+);
+const seriesStarPlus = await streamingResult(
+  'seriesStarPlus',
+  'tv',
+  'star_plus'
+);
+const seriesCrunchyroll = await streamingResult(
+  'seriesCrunchyroll',
+  'tv',
+  'crunchyroll'
+);
+
+onMounted(() => {
+  loading.value = false;
+});
 </script>
 
 <template>
-  <div>
+  <div
+    v-if="loading"
+    class="absolute top-0 left-0 z-20 flex items-center justify-center bg-jet-black w-full h-screen"
+  >
+    <img
+      class="w-[150px] h-[150px] laptop:w-[200px] laptop:h-[200px] animate-scale"
+      src="/favicon.png"
+    />
+  </div>
+  <div v-else>
     <SwipersLargeImageTrendingsSwiper
       :swiper-slides="trendings?.slice(0, 10)"
     />
 
-    <div class="flex flex-col gap-y-10 px-2 my-10">
+    <div class="flex flex-col gap-y-10 laptop:gap-y-16 px-2 mt-10 mb-16">
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Tendencias
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Peliculas y Series</span
@@ -173,7 +208,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Populares
           <span class="opacity-50 text-x-sm uppercase ml-2">Peliculas</span>
         </h2>
@@ -183,7 +218,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Populares
           <span class="opacity-50 text-x-sm uppercase ml-2">Series</span>
         </h2>
@@ -193,7 +228,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Netflix
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Peliculas Populares</span
@@ -205,7 +240,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Netflix
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Series Populares</span
@@ -217,7 +252,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           HBO Max
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Peliculas Populares</span
@@ -229,7 +264,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           HBO Max
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Series Populares</span
@@ -241,7 +276,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Amazon Prime Video
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Peliculas Populares</span
@@ -253,7 +288,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Amazon Prime Video
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Series Populares</span
@@ -265,7 +300,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Star Plus
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Peliculas Populares</span
@@ -277,7 +312,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Star Plus
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Series Populares</span
@@ -289,7 +324,7 @@ const seriesCrunchyroll = await streamingResult('crunchyroll', 'tv');
         </div>
       </section>
       <section>
-        <h2 class="font-bold laptop:text-md">
+        <h2 class="font-bold laptop:text-md desktop:text-lg">
           Crunchyroll
           <span class="opacity-50 text-x-sm uppercase ml-2"
             >Series Populares</span

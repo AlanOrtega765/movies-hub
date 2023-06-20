@@ -28,7 +28,9 @@ const links = ref([
       class="absolute z-20 top-0 left-0 bg-dark-jet-black w-full h-screen transition-transform px-4 laptop:flex laptop:items-center laptop:ml-10 laptop:bg-transparent laptop:z-10 laptop:w-fit laptop:translate-x-0 laptop:h-full laptop:relative"
       :class="open ? '-translate-x-0' : '-translate-x-full'"
     >
-      <div class="flex items-center h-16 border-b border-slate-gray laptop:hidden">
+      <div
+        class="flex items-center h-16 border-b border-slate-gray laptop:hidden"
+      >
         <font-awesome-icon @click="open = false" size="xl" icon="xmark" />
         <NuxtLink
           class="absolute top-0 left-1/2 -translate-x-1/2 flex items-center"
@@ -43,9 +45,10 @@ const links = ref([
       <ul class="flex flex-col mt-4 laptop:flex-row laptop:mt-0 laptop:gap-x-4">
         <li v-for="(link, index) in links" :key="index">
           <NuxtLink
-            class="block text-md laptop:text-base py-2"
+            @click="open = false"
+            class="block text-md laptop:text-base py-1 px-3 rounded brightness-75 hover:brightness-100 font-bold"
             :to="link.route"
-            exact-active-class="font-bold"
+            exact-active-class="font-bold bg-slate-gray/30 brightness-100"
             >{{ link.name }}</NuxtLink
           >
         </li>
