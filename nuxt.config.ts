@@ -1,3 +1,5 @@
+import vuetify from 'vite-plugin-vuetify';
+
 export default defineNuxtConfig({
   app: {
     head: {
@@ -31,7 +33,7 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    transpile: ['@fortawesome/vue-fontawesome'],
+    transpile: ['@fortawesome/vue-fontawesome', 'vuetify'],
   },
   devtools: { enabled: true },
   css: [
@@ -44,7 +46,14 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['nuxt-swiper'],
+  modules: [
+    'nuxt-swiper',
+    async (options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        config?.plugins?.push(vuetify());
+      });
+    },
+  ],
   swiper: {
     modules: ['autoplay', 'pagination', 'free-mode'],
   },

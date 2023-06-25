@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSwiperBreakpoints } from '~/composables/useSwiperBreakpoints';
+import { useOtherSwiperBreakpoints } from '~/composables/useSwiperBreakpoints';
 import useSlug from '~/composables/useSlug';
 
 defineProps<{
@@ -18,20 +18,20 @@ const onSlideNext = () => swiperRef.value.$el.swiper.slideNext();
     ref="swiperRef"
     class="h-full group"
     :modules="[SwiperFreeMode]"
-    :breakpoints="useSwiperBreakpoints"
+    :breakpoints="useOtherSwiperBreakpoints"
     :free-mode="true"
     :space-between="8"
   >
     <SwiperSlide v-for="slide in swiperSlides" :key="slide.id">
       <NuxtLink
         class="relative"
-        :to="`/movies/${slide.id}-${useSlug(slide.title)}`"
+        :to="`/series/${slide.id}-${useSlug(slide.name)}`"
       >
         <img
           v-if="slide.poster_path"
           class="swiper-image"
           :src="config.public.apiImageUrl + '/w300' + slide.poster_path"
-          :alt="slide.title"
+          :alt="slide.name"
         />
         <SwipersCardImageNotFoundSwiper v-else />
         <div

@@ -70,29 +70,7 @@ const getPopularMediaOnStreaming = async (
   return response.results;
 };
 
-const streamingResult = async (
-  key: string,
-  media_type: string,
-  provider: string
-) => {
-  const { data } = await useLazyAsyncData(
-    key,
-    () => getPopularMediaOnStreaming(media_type, PROVIDERS[provider]),
-    {
-      transform: (results) => {
-        return results.map((result) => ({
-          id: result.id,
-          title: result.title || result.name,
-          poster_path: result.poster_path,
-          vote_average: result.vote_average,
-        }));
-      },
-    }
-  );
-  return data.value;
-};
-
-const { data: trendings } = await useLazyAsyncData(
+const { data: trendings } = await useAsyncData(
   'trendings',
   () => getTrendings(),
   {
@@ -140,38 +118,139 @@ const { data: popularSeries } = await useLazyAsyncData(
   }
 );
 
-const moviesNetflix = await streamingResult(
-  'moviesNetflix',
-  'movie',
-  'netflix'
+const { data: moviesNetflix } = await useLazyAsyncData(
+    'moviesNetflix',
+    () => getPopularMediaOnStreaming('movie', PROVIDERS.netflix),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.title,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
 );
-const seriesNetflix = await streamingResult('seriesNetflix', 'tv', 'netflix');
-const moviesHboMax = await streamingResult('moviesHboMax', 'movie', 'hbo_max');
-const seriesHboMax = await streamingResult('seriesHboMax', 'tv', 'hbo_max');
-const moviesAmazonPrimeVideo = await streamingResult(
-  'moviesAmazonPrimeVideo',
-  'movie',
-  'amazon_prime_video'
+
+const { data: seriesNetflix } = await useLazyAsyncData(
+    'seriesNetflix',
+    () => getPopularMediaOnStreaming('tv', PROVIDERS.netflix),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.name,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
 );
-const seriesAmazonPrimeVideo = await streamingResult(
-  'seriesAmazonPrimeVideo',
-  'tv',
-  'amazon_prime_video'
+
+const { data: moviesHboMax } = await useLazyAsyncData(
+    'moviesHboMax',
+    () => getPopularMediaOnStreaming('movie', PROVIDERS.hbo_max),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.title,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
 );
-const moviesStarPlus = await streamingResult(
-  'moviesStarPlus',
-  'movie',
-  'star_plus'
+
+const { data: seriesHboMax } = await useLazyAsyncData(
+    'seriesHboMax',
+    () => getPopularMediaOnStreaming('tv', PROVIDERS.hbo_max),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.name,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
 );
-const seriesStarPlus = await streamingResult(
-  'seriesStarPlus',
-  'tv',
-  'star_plus'
+
+const { data: moviesAmazonPrimeVideo } = await useLazyAsyncData(
+    'moviesAmazonPrimeVideo',
+    () => getPopularMediaOnStreaming('movie', PROVIDERS.amazon_prime_video),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.title,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
 );
-const seriesCrunchyroll = await streamingResult(
-  'seriesCrunchyroll',
-  'tv',
-  'crunchyroll'
+
+const { data: seriesAmazonPrimeVideo } = await useLazyAsyncData(
+    'seriesAmazonPrimeVideo',
+    () => getPopularMediaOnStreaming('tv', PROVIDERS.amazon_prime_video),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.name,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
+);
+
+const { data: moviesStarPlus } = await useLazyAsyncData(
+    'moviesStarPlus',
+    () => getPopularMediaOnStreaming('movie', PROVIDERS.star_plus),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.title,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
+);
+
+const { data: seriesStarPlus } = await useLazyAsyncData(
+    'seriesStarPlus',
+    () => getPopularMediaOnStreaming('tv', PROVIDERS.star_plus),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.name,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
+);
+
+const { data: seriesCrunchyroll } = await useLazyAsyncData(
+    'seriesCrunchyroll',
+    () => getPopularMediaOnStreaming('tv', PROVIDERS.crunchyroll),
+    {
+      transform: (results) => {
+        return results.map((result) => ({
+          id: result.id,
+          title: result.name,
+          poster_path: result.poster_path,
+          vote_average: result.vote_average,
+        }));
+      },
+    }
 );
 
 onMounted(() => {

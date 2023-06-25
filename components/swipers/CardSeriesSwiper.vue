@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useSwiperBreakpoints from '@/composables/useSwiperBreakpoints';
+import { useSwiperBreakpoints } from '@/composables/useSwiperBreakpoints';
 import useSlug from '~/composables/useSlug';
 
 defineProps<{
@@ -30,7 +30,7 @@ const onSlideNext = () => swiperRef.value.$el.swiper.slideNext();
           :src="config.public.apiImageUrl + '/w300' + slide.poster_path"
           :alt="slide.title"
         />
-        <SwipersCardImageNotFound v-else />
+        <SwipersCardImageNotFoundSwiper v-else />
         <div
           class="absolute top-0 right-0 z-20 text-x-sm laptop:text-sm bg-jet-black/80 rounded-bl-md px-2 py-1"
         >

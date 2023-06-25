@@ -1,4 +1,4 @@
-const GENRE_COLORS = {
+const genres: any = {
   12: 'bg-[#B8860B]',
   14: 'bg-[#006400]',
   16: 'bg-[#3B7BA9]',
@@ -27,8 +27,8 @@ const GENRE_COLORS = {
   10770: 'bg-[#FFE066]',
 };
 
-const useGenres = (genre_id) => {
-  return GENRE_COLORS[genre_id] || '';
+const useGenres = (genre_id: number) => {
+  return genres[genre_id];
 };
 
 export default useGenres;

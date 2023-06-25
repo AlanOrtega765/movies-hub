@@ -10,7 +10,7 @@
 
 @layer components {
   .swiper-container {
-    @apply h-[170px] mt-2 tablet:h-[180px] laptop:h-[200px] desktop:h-[220px] large-desktop:h-[280px];
+    @apply h-[170px] mt-2 tablet:h-[180px] laptop:h-[200px] desktop:h-[280px] large-desktop:h-[300px];
   }
   .swiper-loading {
     @apply flex justify-center items-center border border-just-white rounded-md h-full w-full;

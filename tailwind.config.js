@@ -17,8 +17,8 @@ module.exports = {
     screens: {
       tablet: '640px',
       laptop: '1024px',
-      desktop: '1280px',
-      'large-desktop': '1536px',
+      desktop: '1440px',
+      'large-desktop': '2560px',
     },
     fontFamily: {
       montserrat: ['Montserrat', 'sans-serif'],

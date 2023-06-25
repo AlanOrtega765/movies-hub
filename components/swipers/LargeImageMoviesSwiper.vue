@@ -56,9 +56,7 @@ const config = useRuntimeConfig();
         </p>
         <NuxtLink
           class="w-fit py-2 px-4 uppercase rounded text-sm font-bold mt-4 bg-slate-gray"
-          :to="`/${slide.media_type === 'movie' ? 'movies' : 'series'}/${
-            slide.id
-          }-${useSlug(slide.title)}`"
+          :to="`/movies/${slide.id}-${useSlug(slide.title)}`"
           >Ver Más</NuxtLink
         >
       </div>

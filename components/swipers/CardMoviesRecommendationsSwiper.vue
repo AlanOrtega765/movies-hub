@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSwiperBreakpoints } from '~/composables/useSwiperBreakpoints';
+import { useOtherSwiperBreakpoints } from '~/composables/useSwiperBreakpoints';
 import useSlug from '~/composables/useSlug';
 
 defineProps<{
@@ -18,7 +18,7 @@ const onSlideNext = () => swiperRef.value.$el.swiper.slideNext();
     ref="swiperRef"
     class="h-full group"
     :modules="[SwiperFreeMode]"
-    :breakpoints="useSwiperBreakpoints"
+    :breakpoints="useOtherSwiperBreakpoints"
     :free-mode="true"
     :space-between="8"
   >
