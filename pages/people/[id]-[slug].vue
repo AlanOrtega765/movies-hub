@@ -145,7 +145,6 @@ onMounted(() => {
       <div class="h-[1px] w-full bg-just-white/25 my-8 rounded-full"></div>
       <div class="mt-8">
         <h2 class="font-bold laptop:text-lg">Actuando en Películas</h2>
-
         <div
           class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 large-desktop:grid-cols-5 gap-4 mt-2"
         >
@@ -159,7 +158,7 @@ onMounted(() => {
                 <source
                   media="(max-width: 640px)"
                   :srcset="
-                    config.public.apiImageUrl + '/w300' + movie.backdrop_path
+                    config.public.apiImageUrl + '/w500' + movie.backdrop_path
                   "
                 />
                 <img

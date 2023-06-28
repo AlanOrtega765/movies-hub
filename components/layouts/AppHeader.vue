@@ -59,7 +59,7 @@ const setMediaType = (media_type: string) => {
 
 <template>
   <header
-    class="fixed top-0 left-0 flex z-20 items-center h-16 px-4 w-full bg-jet-black/80 backdrop-blur-md shadow-xl"
+    class="fixed top-0 left-0 flex z-30 items-center h-16 px-4 w-full bg-jet-black/80 backdrop-blur-md shadow-xl"
   >
     <div class="laptop:hidden">
       <font-awesome-icon @click="open = true" size="lg" icon="bars" />

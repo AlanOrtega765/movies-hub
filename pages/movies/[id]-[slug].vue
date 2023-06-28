@@ -55,6 +55,7 @@ interface MovieCollection {
       title: string;
       backdrop_path: string;
       vote_average: number;
+      release_date: string;
     };
   };
 }
@@ -213,7 +214,9 @@ onMounted(() => {
                   v-if="onVideo"
                   class="fixed z-30 top-0 left-0 bg-jet-black/90 w-full h-screen flex justify-between items-center"
                 >
-                  <div class="absolute top-0 left-0 flex items-center justify-center w-full h-[90%]">
+                  <div
+                    class="absolute top-0 left-0 flex items-center justify-center w-full h-[90%]"
+                  >
                     <font-awesome-icon
                       class="absolute top-5 right-5 laptop:top-10 laptop:right-10 cursor-pointer text-xl"
                       @click="onVideo = false"
@@ -388,48 +391,57 @@ onMounted(() => {
                 <h2 class="font-bold laptop:text-lg mt-8">Resumen</h2>
                 <p class="font-light">{{ collection?.overview }}</p>
               </div>
-              <div class="grid grid-cols-2 gap-4 mt-8">
+              <div
+                class="grid grid-cols-2 tablet:grid-cols-3 desktop:grid-cols-4 large-desktop:grid-cols-5 gap-4 mt-2"
+              >
                 <div
-                  class="bg-dark-jet-black rounded-lg shadow-dark shadow-md group overflow-hidden"
+                  class="bg-dark-jet-black shadow-dark shadow-md overflow-hidden rounded-md"
                   v-for="movie in collection?.parts"
                   :key="movie.id"
                 >
                   <NuxtLink
-                    :to="`/movies/${movie.id}-${useSlug(movie.title)}`"
                     class="block overflow-hidden"
+                    :to="`/movies/${movie.id}-${useSlug(movie.title)}`"
                   >
-                    <picture class="relative">
-                      <source media="(max-width: 640px)" srcset="" />
-                      <img
-                        v-if="movie.backdrop_path"
-                        class="w-full h-[100px] rounded-t-lg object-cover group-hover:scale-110"
-                        :src="
+                    <picture>
+                      <source
+                        media="(max-width: 640px)"
+                        :srcset="
                           config.public.apiImageUrl +
-                          '/w780' +
+                          '/w500' +
                           movie.backdrop_path
                         "
-                        alt=""
+                      />
+                      <img
+                        v-if="movie.backdrop_path"
+                        class="w-full h-[110px] desktop:h-[150px] object-cover rounded-t-md hover:scale-110 laptop:brightness-75 laptop:hover:brightness-100"
+                        :src="
+                          config.public.apiImageUrl +
+                          '/w500' +
+                          movie.backdrop_path
+                        "
+                        :alt="movie.title"
                       />
                       <div
                         v-else
-                        class="bg-gray flex items-center justify-center w-full h-[100px] rounded-t-lg group-hover:scale-110"
+                        class="flex items-center justify-center bg-gray w-full h-[110px] hover:scale-110 desktop:h-[150px] rounded-t-md laptop:brightness-75 laptop:hover:brightness-100"
                       >
                         <font-awesome-icon size="4x" icon="image" />
                       </div>
-                      <div
-                        class="absolute top-0 right-0 z-20 text-sm laptop:text-md bg-jet-black/80 rounded-bl-md rounded-tr-md px-2 py-1"
-                      >
-                        <font-awesome-icon icon="star" />
-                        <span class="ml-1 font-bold">{{
-                          movie.vote_average.toFixed(1)
-                        }}</span>
-                      </div>
                     </picture>
                   </NuxtLink>
-                  <div class="p-4">
-                    <h2 class="text-center font-bold text-x-sm">
+                  <div class="px-2 py-3">
+                    <h3 class="text-sm font-bold laptop:text-base text-center">
                       {{ movie.title }}
-                    </h2>
+                      <span
+                        class="text-gray font-medium text-x-sm laptop:text-sm"
+                        >{{
+                          movie.release_date
+                            ? `(${movie.release_date.slice(0, 4)})`
+                            : ''
+                        }}</span
+                      >
+                    </h3>
                   </div>
                 </div>
               </div>
