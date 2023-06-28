@@ -171,7 +171,7 @@ onMounted(() => {
         ></div>
       </picture>
     </div>
-    <div class="relative -mt-[15vh] mb-10 px-4 laptop:w-[70%] laptop:mx-auto">
+    <div class="relative -mt-[20vh] laptop:-mt-[30vh] mb-10 px-4 laptop:w-[70%] laptop:mx-auto">
       <section>
         <div class="flex flex-col items-center">
           <picture class="relative z-10">

@@ -140,7 +140,7 @@ onMounted(() => {
         ></div>
       </picture>
     </div>
-    <div class="relative -mt-[15vh] mb-10 px-4 laptop:w-[70%] laptop:mx-auto">
+    <div class="relative -mt-[20vh] laptop:-mt-[30vh] mb-10 px-4 laptop:w-[70%] laptop:mx-auto">
       <section>
         <div class="flex flex-col items-center">
           <picture class="relative z-10">
@@ -206,7 +206,7 @@ onMounted(() => {
             <h1 class="font-bold mt-4 text-md laptop:text-xl">
               {{ serie?.name }}
               <span class="text-gray font-medium"
-                >({{ serie?.last_air_date.slice(0, 4) }})</span
+                >({{ serie?.last_air_date ? serie?.last_air_date.slice(0, 4) : 'No disponible.'}})</span
               >
             </h1>
             <span v-if="serie?.tagline" class="italic">{{
@@ -352,7 +352,7 @@ onMounted(() => {
               <h2 class="text-x-sm desktop:text-sm font-bold">
                 {{ season.name }}
                 <span class="text-gray"
-                  >({{ season.air_date.slice(0, 4) }})</span
+                  >{{ season.air_date ? `(${season.air_date.slice(0, 4)})` : '' }}</span
                 >
               </h2>
 
