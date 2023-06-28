@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import useSlug from '~/composables/useSlug';
 
-interface Person {
-  id: number;
-  name: string;
-  profile_path: string;
-}
-
 const config = useRuntimeConfig();
 const currentPage = ref(1);
 const people: any = ref([]);
@@ -23,7 +17,7 @@ const visibilityChanged = (isVisible: boolean) => {
 const getPeopleResults = async (page: number) => {
   const response = (await $fetch(
     `${config.public.apiBaseUrl}/person/popular?api_key=${config.public.apiKey}&language=es-MX&page=${page}`
-  )) as { results: Person[] };
+  )) as { results: any };
 
   pending.value = false;
   return response.results;
@@ -35,7 +29,7 @@ const getPeople = async () => {
     () => getPeopleResults(currentPage.value),
     {
       transform: (data) => {
-        return data.map((person) => ({
+        return data.map((person: any) => ({
           id: person.id,
           name: person.name,
           profile_path: person.profile_path,
@@ -62,7 +56,7 @@ const { data } = await useAsyncData(
   () => getPeopleResults(currentPage.value),
   {
     transform: (data) => {
-      return data.map((person) => ({
+      return data.map((person: any) => ({
         id: person.id,
         name: person.name,
         profile_path: person.profile_path,
