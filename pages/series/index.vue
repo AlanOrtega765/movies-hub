@@ -290,7 +290,7 @@ onMounted(() => {
               />
               <div
                 v-else
-                class="flex items-center justify-center bg-gray w-full h-[200px] rounded-t-lg group-hover:scale-110"
+                class="flex items-center justify-center bg-gray w-full h-[150px] laptop:h-[120px] desktop:h-[150px] rounded-t-lg group-hover:scale-110"
               >
                 <font-awesome-icon size="4x" icon="image" />
               </div>
