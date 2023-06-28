@@ -109,7 +109,7 @@ onMounted(() => {
 <template>
   <div
     v-if="loading"
-    class="absolute top-0 left-0 z-20 flex items-center justify-center bg-jet-black w-full h-full"
+    class="absolute top-0 left-0 z-40 flex items-center justify-center bg-jet-black w-full h-full"
   >
     <img
       class="w-[150px] h-[150px] laptop:w-[200px] laptop:h-[200px] animate-scale"
