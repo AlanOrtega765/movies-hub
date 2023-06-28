@@ -284,7 +284,7 @@ onMounted(() => {
               />
               <img
                 v-if="serie.backdrop_path"
-                class="w-full h-[200px] rounded-t-lg object-cover group-hover:scale-110"
+                class="w-full h-[150px] laptop:h-[120px] desktop:h-[150px] rounded-t-lg object-cover group-hover:scale-110"
                 :src="config.public.apiImageUrl + '/w780' + serie.backdrop_path"
                 :alt="serie.title"
               />
