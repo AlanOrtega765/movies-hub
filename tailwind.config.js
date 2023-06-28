@@ -13,6 +13,16 @@ module.exports = {
       transitionProperty: {
         width: 'width',
       },
+      animation: {
+        scale: 'scale 1.5s linear infinite',
+      },
+      keyframes: {
+        scale: {
+          '0%': { transform: 'scale(0.5)' },
+          '50%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(0.5)' },
+        },
+      },
     },
     screens: {
       tablet: '640px',
@@ -42,15 +52,8 @@ module.exports = {
       'just-white': '#FFFFFF',
       'dark-jet-black': '#0C0C0D',
     },
-    animation: {
-      scale: 'scale 1.5s linear infinite',
-    },
-    keyframes: {
-      scale: {
-        '0%': { transform: 'scale(0.5)' },
-        '50%': { transform: 'scale(1)' },
-        '100%': { transform: 'scale(0.5)' },
-      },
+    boxShadowColor: {
+      dark: '#020202',
     },
   },
   plugins: [],

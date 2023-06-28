@@ -70,6 +70,7 @@ const genres: any = {
   10768: 'bg-[#556B2F]',
 };
 const onVideo = ref(false);
+const loading = ref(true);
 
 const getSerie = async () => {
   const response: Serie = await $fetch(
@@ -99,10 +100,23 @@ const getOriginalLanguage = (movie_language: string | undefined) => {
 
 const { data: serie } = await useAsyncData('tv', () => getSerie());
 const { data: languages } = await useFetch('/api/languages');
+
+onMounted(() => {
+  loading.value = false;
+});
 </script>
 
 <template>
-  <div>
+  <div
+    v-if="loading"
+    class="absolute top-0 left-0 z-20 flex items-center justify-center bg-jet-black w-full h-full"
+  >
+    <img
+      class="w-[150px] h-[150px] laptop:w-[200px] laptop:h-[200px] animate-scale"
+      src="/favicon.png"
+    />
+  </div>
+  <div v-else>
     <div class="relative h-[40vh] desktop:h-[80vh]">
       <picture>
         <source
@@ -126,7 +140,7 @@ const { data: languages } = await useFetch('/api/languages');
         ></div>
       </picture>
     </div>
-    <div class="relative -top-[15vh] px-4 laptop:w-[70%] laptop:mx-auto">
+    <div class="relative -mt-[15vh] mb-10 px-4 laptop:w-[70%] laptop:mx-auto">
       <section>
         <div class="flex flex-col items-center">
           <picture class="relative z-10">
@@ -136,18 +150,18 @@ const { data: languages } = await useFetch('/api/languages');
             />
             <img
               v-if="serie?.poster_path"
-              class="w-[150px] h-[220px] laptop:w-[200px] laptop:h-[300px] desktop:w-[250px] desktop:h-[350px] rounded-lg object-fill"
-              :src="config.public.apiImageUrl + '/w300' + serie?.poster_path"
+              class="w-[150px] h-[220px] laptop:w-[200px] laptop:h-[300px] desktop:w-[250px] desktop:h-[350px] rounded-lg object-fill shadow-dark shadow-lg"
+              :src="config.public.apiImageUrl + '/w500' + serie?.poster_path"
               :alt="serie?.name"
             />
             <div
               v-else
-              class="w-[150px] h-[200px] laptop:w-[200px] laptop:h-[300px] desktop:w-[250px] desktop:h-[350px] flex justify-center items-center bg-gray rounded-lg"
+              class="w-[150px] h-[200px] laptop:w-[200px] laptop:h-[300px] desktop:w-[250px] desktop:h-[350px] flex justify-center items-center bg-gray rounded-lg shadow-dark shadow-lg"
             >
               <font-awesome-icon size="4x" icon="image" />
             </div>
             <div
-              class="absolute top-0 right-0 z-20 text-sm laptop:text-sm bg-jet-black/80 rounded-bl-md rounded-tr-md px-2 py-1"
+              class="absolute top-0 right-0 z-20 text-sm laptop:text-md bg-jet-black/80 rounded-bl-md rounded-tr-md px-2 py-1"
             >
               <font-awesome-icon icon="star" />
               <span class="ml-1 font-bold">{{
@@ -219,7 +233,7 @@ const { data: languages } = await useFetch('/api/languages');
               {{ serie?.overview ? serie?.overview : 'No disponible.' }}
             </p>
           </div>
-          <div class="grid grid-cols-2 gap-x-4">
+          <div class="grid grid-cols-2 gap-x-4 mt-4">
             <div>
               <h2 class="font-bold laptop:text-lg">Título Original</h2>
               <span class="font-light laptop:text-md">{{

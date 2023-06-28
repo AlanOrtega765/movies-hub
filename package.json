@@ -24,6 +24,7 @@
     "date-fns": "^2.30.0",
     "nuxt-swiper": "^1.1.0",
     "vite-plugin-vuetify": "^1.0.2",
+    "vue-observe-visibility": "^2.0.0-alpha.1",
     "vue3-youtube": "^0.1.9",
     "vuetify": "^3.3.5"
   }

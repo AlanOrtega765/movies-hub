@@ -29,10 +29,17 @@ const config = useRuntimeConfig();
           :srcset="config.public.apiImageUrl + '/w1280' + slide.backdrop_path"
         />
         <img
+          v-if="slide.backdrop_path"
           class="w-full h-full object-cover object-center"
           :src="config.public.apiImageUrl + '/original' + slide.backdrop_path"
           :alt="slide.title"
         />
+        <div
+          v-else
+          class="bg-gray w-full h-full flex items-center justify-center"
+        >
+          <font-awesome-icon size="6x" icon="image" />
+        </div>
       </picture>
       <div
         class="absolute top-0 left-0 flex flex-col justify-end bg-gradient-to-t from-jet-black to-transparent h-full w-full text-just-white px-4 pb-16"

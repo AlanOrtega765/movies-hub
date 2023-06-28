@@ -14,6 +14,14 @@ const movies: any = ref([]);
 const moreMovies: any = ref([]);
 const currentPage = ref(1);
 const currentList = ref(1);
+const loading = ref(true);
+const pending = ref(false);
+
+const visibilityChanged = (isVisible: boolean) => {
+  if (isVisible) {
+    if (currentPage.value > 1) nextPage();
+  }
+};
 
 const getMovieList = async (movie_list: string, page: number) => {
   const response = (await $fetch(
@@ -24,6 +32,7 @@ const getMovieList = async (movie_list: string, page: number) => {
     throw new Error('Respuesta inválida');
   }
 
+  pending.value = false;
   return response.results;
 };
 
@@ -36,6 +45,7 @@ const getMovieOfGenre = async (list_id: number, page: number) => {
     throw new Error('Respuesta inválida');
   }
 
+  pending.value = false;
   return response.results;
 };
 
@@ -73,7 +83,6 @@ const getMovieGenre = async (list_id: number) => {
           return data.map((movie) => ({
             id: movie.id,
             title: movie.title,
-            overview: movie.overview,
             backdrop_path: movie.backdrop_path,
             vote_average: movie.vote_average,
           }));
@@ -106,7 +115,6 @@ const getMovieGenre = async (list_id: number) => {
           return data.map((movie) => ({
             id: movie.id,
             title: movie.title,
-            overview: movie.overview,
             backdrop_path: movie.backdrop_path,
             vote_average: movie.vote_average,
           }));
@@ -139,7 +147,6 @@ const getMovieGenre = async (list_id: number) => {
           return data.map((movie) => ({
             id: movie.id,
             title: movie.title,
-            overview: movie.overview,
             backdrop_path: movie.backdrop_path,
             vote_average: movie.vote_average,
           }));
@@ -172,7 +179,6 @@ const getMovieGenre = async (list_id: number) => {
           return data.map((movie) => ({
             id: movie.id,
             title: movie.title,
-            overview: movie.overview,
             backdrop_path: movie.backdrop_path,
             vote_average: movie.vote_average,
           }));
@@ -204,7 +210,6 @@ const getMovieGenre = async (list_id: number) => {
         return data.map((movie) => ({
           id: movie.id,
           title: movie.title,
-          overview: movie.overview,
           backdrop_path: movie.backdrop_path,
           vote_average: movie.vote_average,
         }));
@@ -223,16 +228,30 @@ const getMovieGenre = async (list_id: number) => {
 };
 
 const nextPage = () => {
+  pending.value = true;
   currentPage.value++;
 
   getMovieGenre(currentList.value);
 };
 
 getMovieGenre(1);
+
+onMounted(() => {
+  loading.value = false;
+});
 </script>
 
 <template>
-  <div>
+  <div
+    v-if="loading"
+    class="absolute top-0 left-0 z-20 flex items-center justify-center bg-jet-black w-full h-full"
+  >
+    <img
+      class="w-[150px] h-[150px] laptop:w-[200px] laptop:h-[200px] animate-scale"
+      src="/favicon.png"
+    />
+  </div>
+  <div v-else>
     <SwipersLargeImageMoviesSwiper
       :swiper-slides="popularMovies?.slice(0, 10).reverse()"
     />
@@ -247,11 +266,14 @@ getMovieGenre(1);
         class="grid grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-4 desktop:grid-cols-5 gap-4"
       >
         <div
-          class="bg-dark-jet-black rounded-lg group overflow-hidden"
+          class="bg-dark-jet-black shadow-dark shadow-md rounded-lg group overflow-hidden"
           v-for="movie in movies"
           :key="movie.id"
         >
-          <NuxtLink :to="`/movies/${movie.id}-${useSlug(movie.title)}`" class="block overflow-hidden">
+          <NuxtLink
+            :to="`/movies/${movie.id}-${useSlug(movie.title)}`"
+            class="block overflow-hidden"
+          >
             <picture class="relative">
               <source
                 media="(max-width: 640px)"
@@ -262,13 +284,13 @@ getMovieGenre(1);
               />
               <img
                 v-if="movie.backdrop_path"
-                class="w-full h-[150px] rounded-t-lg object-cover group-hover:scale-110"
+                class="w-full h-[200px] rounded-t-lg object-cover group-hover:scale-110"
                 :src="config.public.apiImageUrl + '/w780' + movie.backdrop_path"
                 :alt="movie.title"
               />
               <div
                 v-else
-                class="flex items-center justify-center bg-gray w-full h-[150px] rounded-t-lg"
+                class="flex items-center justify-center bg-gray w-full h-[200px] rounded-t-lg group-hover:scale-110"
               >
                 <font-awesome-icon size="4x" icon="image" />
               </div>
@@ -285,7 +307,7 @@ getMovieGenre(1);
             </h2>
             <div class="flex gap-x-2 mt-2">
               <v-rating
-                :model-value="movie.vote_average / 2"
+                :model-value="(movie.vote_average / 2).toFixed(1)"
                 size="small"
                 half-increments
                 empty-icon="far fa-star"
@@ -294,17 +316,22 @@ getMovieGenre(1);
                 density="compact"
                 :readonly="true"
               ></v-rating>
-              <p class="text-md">{{ movie.vote_average / 2 }}</p>
+              <p class="text-md">{{ (movie.vote_average / 2).toFixed(1) }}</p>
             </div>
           </div>
         </div>
       </div>
       <button
+        v-if="!pending"
         class="bg-slate-gray w-full py-4 font-bold uppercase rounded-md my-10"
         @click="nextPage"
+        v-observe-visibility="visibilityChanged"
       >
         Ver Más
       </button>
+      <div v-else class="flex justify-center py-14">
+        <font-awesome-icon class="animate-spin" size="2x" icon="circle-notch" />
+      </div>
     </div>
   </div>
 </template>

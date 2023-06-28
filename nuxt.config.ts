@@ -5,6 +5,9 @@ export default defineNuxtConfig({
     head: {
       link: [
         {
+          title: 'Movies Hub',
+        },
+        {
           rel: 'icon',
           type: 'image/png',
           href: '/favicon.png',

@@ -13,6 +13,8 @@ library.add(
   fas.faStar,
   fas.faCircleInfo,
   fas.faStar,
+  fas.faSearch,
+  fas.faCircleNotch,
   far.faStar,
   far.faStarHalfStroke,
   far.faCirclePlay,
