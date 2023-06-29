@@ -322,7 +322,7 @@ onMounted(() => {
       <section>
         <h2 class="font-bold laptop:text-lg">Temporadas</h2>
         <div
-          class="grid grid-cols-3 tablet:grid-cols-5 desktop:grid-cols-7 large-desktop:grid-cols-8 gap-4 mt-2"
+          class="grid grid-cols-3 tablet:grid-cols-5 desktop:grid-cols-6 large-desktop:grid-cols-7 gap-4 mt-2"
         >
           <div
             class="bg-dark-jet-black rounded-md"
@@ -337,7 +337,7 @@ onMounted(() => {
               />
               <img
                 v-if="season.poster_path"
-                class="w-full h-[150px] tablet:h-[180px] laptop:h-[200px] desktop:h-[220px] large-desktop:h-[280px] object-fill rounded-t-md"
+                class="w-full h-[150px] tablet:h-[180px] laptop:h-[200px] desktop:h-[220px] large-desktop:h-[250px] object-fill rounded-t-md"
                 :src="config.public.apiImageUrl + '/w300' + season.poster_path"
                 :alt="season.name"
               />
