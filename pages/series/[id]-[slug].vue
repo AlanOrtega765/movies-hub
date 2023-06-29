@@ -199,7 +199,6 @@ onMounted(() => {
                   </VueYoutube>
                 </div>
               </Teleport>
-              <span class="block mt-1 text-center">Ver Tráiler</span>
             </div>
           </picture>
           <div class="flex flex-col items-center text-center">
