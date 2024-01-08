@@ -2,7 +2,7 @@
 const { apiImgUrl } = useRuntimeConfig().public;
 
 const { slideNext, slidePrev } = useSwiperHelpers();
-const { formatRuntime } = useUtils();
+const { formatRuntime, formatDate } = useUtils();
 
 const { data: popularMovieAndSerie } = await useFetch(
   '/api/popular-movie-and-serie'
@@ -28,7 +28,7 @@ const swiperRef = ref();
             <Icon name="ph:dot" />
             <span>{{ media.vote_count }} Reseñas</span>
             <Icon name="ph:dot" />
-            <span>{{ media.release_date || media.first_air_date }}</span>
+            <span>{{ formatDate(media.release_date) || formatDate(media.first_air_date) }}</span>
             <Icon name="ph:dot" />
             <span>{{
               formatRuntime(media.runtime) ||

@@ -15,13 +15,14 @@ export interface Media {
   vote_count: number;
   origin_country?: string[];
   original_name?: string;
-  first_air_date?: string;
+  first_air_date: string;
   name?: string;
   homepage?: string;
   runtime: number;
   budget: number;
   revenue: number;
   status: string;
+  recommendations: APIResponse;
   images?: {
     backdrops: Image[];
     posters: Image[];
@@ -50,7 +51,7 @@ export interface Person {
   popularity: number;
   cast_id?: number;
   job?: string;
-  character?: string;
+  character: string;
   credit_id: string;
   order: number;
   also_known_as?: string[];

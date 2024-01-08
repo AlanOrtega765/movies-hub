@@ -13,13 +13,17 @@ const { data: languages } = await useFetch('/api/languages');
 const directors = computed(() =>
   props.media.credits?.crew.filter((person) => person.job === 'Director')
 );
+
+const externalIds = computed(() => ({
+  ...props.media.external_ids,
+  homepage: props.media.homepage,
+}));
+
 const production = computed(() => {
   return props.media.production_companies
     ?.map((production) => production.name)
     .join(', ');
 });
-
-console.log(props.media);
 </script>
 
 <template>
@@ -82,5 +86,6 @@ console.log(props.media);
         <div>{{ production }}</div>
       </template>
     </ul>
+    <MediaExternalLinks :links="externalIds" />
   </article>
 </template>

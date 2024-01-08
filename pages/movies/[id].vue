@@ -13,6 +13,8 @@ const selected = ref(1);
 const selectTab = (index: number) => {
   selected.value = index;
 };
+
+console.log(movie.value?.videos);
 </script>
 
 <template>
@@ -36,15 +38,30 @@ const selectTab = (index: number) => {
           </li>
         </ul>
       </section>
-      <section
-        v-show="selected === 1"
-        class="px-20 flex items-center mx-auto gap-x-12 max-w-screen-xl mt-10"
-      >
-        <MediaDetailCard :poster-path="movie.poster_path" />
-        <MediaDetails :media="movie"/>
+      <section v-show="selected === 1" class="mt-10 px-20">
+        <div class="flex items-center gap-x-12">
+          <MediaDetailCard :poster-path="movie.poster_path" />
+          <MediaInfo :media="movie" />
+        </div>
+        <SwipersMediaCast v-if="movie.credits" :cast="movie.credits?.cast" />
       </section>
-      <section v-show="selected === 2" class="px-20">2</section>
+      <section v-show="selected === 2" class="px-20 mt-10">
+        <div class="grid grid-cols-3 gap-x-4">
+          <div v-for="video in movie.videos?.results" :key="video.id">
+            <youtube-player
+              :src="`https://www.youtube.com/embed?v=${video.key}`"
+              height="300"
+              width="100%"
+            />
+          </div>
+        </div>
+      </section>
       <section v-show="selected === 3" class="px-20">3</section>
+
+      <SwipersMediaRecommendations
+        v-if="movie.recommendations.results.length"
+        :list="movie.recommendations.results"
+      />
     </div>
   </div>
 </template>

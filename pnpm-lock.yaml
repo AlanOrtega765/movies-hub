@@ -14,6 +14,9 @@ dependencies:
   nuxt-swiper:
     specifier: ^1.2.2
     version: 1.2.2
+  vue3-youtube:
+    specifier: ^0.1.9
+    version: 0.1.9
 
 devDependencies:
   '@nuxt/image':
@@ -1521,6 +1524,10 @@ packages:
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
     dev: false
 
+  /@types/youtube@0.0.39:
+    resolution: {integrity: sha512-naVjyTZT/CoNwEQW3+mf9E/x6sgB7QIPbRDtVlPUpHlmuQTk+j6gQBy0T5CRkV8oC0GYQjMgfr3VdueTSVLTjw==}
+    dev: false
+
   /@unhead/dom@1.8.9:
     resolution: {integrity: sha512-qY4CUVNKEM7lEAcTz5t71QYca+NXgUY5RwhSzB6sBBzZxQTiFOeTVKC6uWXU0N+3jBUdP/zdD3iN1JIjziDlng==}
     dependencies:
@@ -2329,6 +2336,11 @@ packages:
       keygrip: 1.1.0
     dev: true
 
+  /core-js@3.35.0:
+    resolution: {integrity: sha512-ntakECeqg81KqMueeGJ79Q5ZgQNR+6eaE8sxGCx62zMbAIj65q+uYvatToew3m6eAGdU4gNZwpZ34NMe4GYswg==}
+    requiresBuild: true
+    dev: false
+
   /core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
 
@@ -2943,6 +2955,10 @@ packages:
   /get-stream@8.0.1:
     resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
     engines: {node: '>=16'}
+
+  /get-youtube-id@1.0.1:
+    resolution: {integrity: sha512-5yidLzoLXbtw82a/Wb7LrajkGn29BM6JuLWeHyNfzOGp1weGyW4+7eMz6cP23+etqj27VlOFtq8fFFDMLq/FXQ==}
+    dev: false
 
   /giget@1.2.1:
     resolution: {integrity: sha512-4VG22mopWtIeHwogGSy1FViXVo0YT+m6BrqZfz0JJFwbSsePsCdOzdLIIli5BtMp7Xe8f/o2OmBpQX2NBOC24g==}
@@ -6209,6 +6225,17 @@ packages:
     dependencies:
       '@vue/devtools-api': 6.5.1
       vue: 3.4.4
+
+  /vue3-youtube@0.1.9:
+    resolution: {integrity: sha512-DhEbLsXDRHF7Cf5eB8vuoAbK+WiFuOHa65vlHU3XE5xky058ZK5/jAtHGr+JGhW0Xy2bSl8Eezz6/cR8GmNzgw==}
+    dependencies:
+      '@types/youtube': 0.0.39
+      core-js: 3.35.0
+      get-youtube-id: 1.0.1
+      vue: 3.4.4
+    transitivePeerDependencies:
+      - typescript
+    dev: false
 
   /vue@3.4.4:
     resolution: {integrity: sha512-suZXgDVT8lRNhKmxdkwOsR0oyUi8is7mtqI18qW97JLoyorEbE9B2Sb4Ws/mR/+0AgA/JUtsv1ytlRSH3/pDIA==}

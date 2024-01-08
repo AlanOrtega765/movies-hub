@@ -1,4 +1,4 @@
-import type { Media, APIResponse } from '~/types';
+import type { Media } from '~/types';
 
 export default defineEventHandler(async (event) => {
   const { apiBase, apiKey } = useRuntimeConfig();
@@ -9,9 +9,9 @@ export default defineEventHandler(async (event) => {
       baseURL: apiBase,
       params: {
         api_key: apiKey,
-        language: 'es-MX',
+        language: 'es-ES',
         include_image_language: 'es',
-        append_to_response: 'credits,videos,images,external_ids'
+        append_to_response: 'credits,videos,images,external_ids,recommendations'
       },
     });
 
