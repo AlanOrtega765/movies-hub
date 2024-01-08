@@ -14,11 +14,17 @@ const { apiImgUrl } = useRuntimeConfig().public;
     <div
       class="px-2 py-2 bg-zinc-800 hover:scale-105 transition-transform rounded-lg"
     >
-      <NuxtLink class="relative" to="#">
+      <NuxtLink class="relative overflow-hidden" to="#">
         <nuxt-img
-          class="w-full h-full rounded-lg object-cover"
+          v-if="profilePath"
+          class="w-full h-full rounded-lg object-fill aspect-[10/15]"
           :src="`${apiImgUrl}/w300_and_h450_bestv2${profilePath}`"
         />
+        <div v-else class="block bg-zinc-800 aspect-[10/15]">
+          <div class="flex justify-center h-full p-2">
+            <Icon class="text-gray" name="ion:person-outline" size="40"/>
+          </div>
+        </div>
       </NuxtLink>
     </div>
     <div class="mt-4">

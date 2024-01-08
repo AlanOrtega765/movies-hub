@@ -20,6 +20,9 @@ const swiperRef = ref();
 const swiperInited = ref(false);
 
 const onSwiperInit = () => (swiperInited.value = true);
+const mediaTypeRoute = computed(() => {
+  return props.mediaType === 'movie' ? 'movies' : 'series';
+});
 </script>
 
 <template>
@@ -38,11 +41,12 @@ const onSwiperInit = () => (swiperInited.value = true);
     >
       <SwiperSlide class="py-4" v-for="media in list" :key="media.id">
         <MediaCard
+          :id="media.id"
           :posterPath="media.poster_path"
           :title="media.title"
           :name="media.name"
           :vote-average="media.vote_average"
-          :id="media.id"
+          :mediaType="mediaTypeRoute"
         />
       </SwiperSlide>
       <SwipersButtonPrev @slide-prev="slidePrev(swiperRef)" />

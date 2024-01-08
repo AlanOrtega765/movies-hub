@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const route = useRoute();
-const movieId = ref(route.params.id);
+const serieId = ref(route.params.id);
 
-const { data: movie } = await useFetch(`/api/movie/${movieId.value}`);
+const { data: serie } = await useFetch(`/api/tv/${serieId.value}`);
 
 const tabSelected = ref(1);
 const videoKey = ref<string | null>(null);
@@ -11,8 +11,8 @@ const posterPath = ref<string | null>(null);
 </script>
 
 <template>
-  <div v-if="movie">
-    <MediaBanner :media="movie" />
+  <div v-if="serie">
+    <MediaBanner :media="serie" />
     <div class="py-10">
       <section>
         <MediaTabs
@@ -22,15 +22,15 @@ const posterPath = ref<string | null>(null);
       </section>
       <section v-show="tabSelected === 1" class="mt-10 mx-auto">
         <div class="flex items-center gap-x-12 max-w-7xl mx-auto">
-          <MediaDetailCard :poster-path="movie.poster_path" />
-          <MediaInfo :media="movie" />
+          <MediaDetailCard :poster-path="serie.poster_path" />
+          <MediaInfo :media="serie" />
         </div>
-        <SwipersMediaCast v-if="movie.credits" :cast="movie.credits?.cast" />
+        <SwipersMediaCast v-if="serie.credits" :cast="serie.credits?.cast" />
       </section>
       <section v-show="tabSelected === 2" class="px-20 mt-10">
         <MediaVideos
-          v-if="movie.videos"
-          :videos="movie.videos?.results"
+          v-if="serie.videos"
+          :videos="serie.videos?.results"
           @select-video="(key: string) => videoKey = key"
         />
       </section>
@@ -39,21 +39,21 @@ const posterPath = ref<string | null>(null);
         class="px-20 mt-10 flex flex-col gap-y-10"
       >
         <MediaBackdrops
-          v-if="movie.images?.backdrops"
-          :backdrops="movie.images?.backdrops"
+          v-if="serie.images?.backdrops"
+          :backdrops="serie.images?.backdrops"
           @select-backdrop="(filePath: string) => backdropPath = filePath"
         />
         <MediaPosters
-          v-if="movie.images?.posters"
-          :posters="movie.images?.posters"
+          v-if="serie.images?.posters"
+          :posters="serie.images?.posters"
           @select-poster="(filePath: string) => posterPath = filePath"
         />
       </section>
 
       <SwipersMediaRecommendations
-        v-if="movie.recommendations.results.length"
-        :list="movie.recommendations.results"
-        :media-type="'movies'"
+        v-if="serie.recommendations.results.length"
+        :list="serie.recommendations.results"
+        :media-type="'series'"
       />
     </div>
     <Teleport to="body">

@@ -28,7 +28,7 @@ const production = computed(() => {
 
 <template>
   <article class="flex flex-col gap-y-6">
-    <h1 class="text-3xl">{{ media.title }}</h1>
+    <h1 class="text-3xl">{{ media.title || media.name }}</h1>
     <p class="text-silver">{{ media.overview }}</p>
     <ul
       class="grid lg:grid-cols-[max-content_1fr_max-content_1fr] gap-3 text-sm text-silver"
@@ -43,7 +43,7 @@ const production = computed(() => {
       </template>
       <template v-if="directors?.length">
         <div>Director</div>
-        <div class="flex flex-wrap gap-1">
+        <div class="flex flex-wrap gap-1 h-fit">
           <NuxtLink
             class="bg-gray/10 px-2 py-1 rounded text-xs hover:bg-gray/20"
             v-for="director in directors"
@@ -62,7 +62,7 @@ const production = computed(() => {
       </template>
       <template v-if="media.genres?.length">
         <div>Genero</div>
-        <div class="flex flex-wrap gap-1">
+        <div class="flex flex-wrap gap-1 h-fit">
           <NuxtLink
             class="bg-gray/10 px-2 py-1 rounded text-xs hover:bg-gray/20"
             v-for="genre in media.genres"

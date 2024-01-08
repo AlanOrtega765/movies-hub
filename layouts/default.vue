@@ -27,7 +27,7 @@ const links = ref([
         </ul>
       </nav>
     </header>
-    <div ref="el" class="bg-jet-black overflow-x-hidden w-full">
+    <div ref="el" class="bg-jet-black overflow-hidden w-full">
       <main>
         <slot />
       </main>

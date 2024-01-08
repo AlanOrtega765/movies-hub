@@ -4,7 +4,7 @@ defineProps<{
 }>();
 
 const { apiImgUrl } = useRuntimeConfig().public;
-const { formatRuntime } = useUtils();
+const { formatRuntime, formatDate } = useUtils();
 
 </script>
 
@@ -23,7 +23,7 @@ const { formatRuntime } = useUtils();
         <Icon name="ph:dot" />
         <span>{{ media.vote_count }} Reseñas</span>
         <Icon name="ph:dot" />
-        <span>{{ media.release_date.slice(0,4) || media.first_air_date.slice(0,4) }}</span>
+        <span>{{ formatDate(media.release_date) || formatDate(media.first_air_date) }}</span>
         <Icon name="ph:dot" />
         <span>{{
           formatRuntime(media.runtime) || media.seasons?.length + ' Temporadas'

@@ -59,13 +59,15 @@ const getMediaList = async () => {
   queryByCategory(`category/by-genre/movie/${selected.value}`);
 };
 
-getMediaList();
-
 const scrollToTop = () => {
   window.scroll({
     top: 0,
+    behavior: 'smooth'
   });
 };
+
+getMediaList();
+
 </script>
 
 <template>
@@ -80,14 +82,15 @@ const scrollToTop = () => {
         />
       </div>
       <div class="grid grid-cols-5 gap-x-4 gap-y-10 col-span-10 px-4">
-        <MediaGridCard
+        <MediaCard
           v-for="movie in movies"
+          :id="movie.id"
           :key="movie.id"
           :title="movie.title"
           :name="movie.name"
           :poster-path="movie.poster_path"
           :vote-average="movie.vote_average"
-          :id="movie.id"
+          :mediaType="'movies'"
         />
         <div
           ref="target"
@@ -102,6 +105,8 @@ const scrollToTop = () => {
         </div>
       </div>
     </section>
-    <button class="fixed bottom-10 right-10" @click="scrollToTop">Subir</button>
+    <button class="fixed bottom-6 right-5 rounded-full border-4 opacity-30 hover:opacity-100 transition-opacity" @click="scrollToTop">
+      <Icon name="tabler:chevron-up" size="50"/>
+    </button>
   </div>
 </template>
