@@ -9,6 +9,7 @@ export interface Media {
   popularity: number;
   poster_path: string;
   release_date: string;
+  media_type: string;
   title: string;
   video: boolean;
   vote_average: number;

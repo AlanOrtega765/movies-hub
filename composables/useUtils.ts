@@ -13,6 +13,14 @@ export const useUtils = () => {
     return null;
   };
 
+  const formatToSlug = (text: any) => {
+    let pattern = /[\^*@!"#$%&/()=?¡!:¿'\\]/gi;
+    let formatted = text.replace(pattern, '').toLocaleLowerCase();
+    let slug = formatted.split(' ').join('-');
+
+    return slug;
+  };
+
   const formatVoteAverage = (vote_average: number) => {
     const _voteAverage = ((vote_average / 10) * 5).toFixed(2);
     return _voteAverage;
@@ -68,6 +76,7 @@ export const useUtils = () => {
     formatRuntime,
     formatDate,
     formatToCurrency,
-    languageByISO
+    languageByISO,
+    formatToSlug
   };
 };

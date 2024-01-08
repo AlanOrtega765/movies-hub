@@ -21,6 +21,7 @@ const emits = defineEmits<{
         <nuxt-img
           class="w-full h-full"
           :src="`https://img.youtube.com/vi/${video.key}/maxresdefault.jpg`"
+          :loading="'lazy'"
         />
         <Icon
           class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30 group-hover:opacity-100 transition-opacity"

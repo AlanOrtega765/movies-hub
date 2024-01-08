@@ -27,6 +27,7 @@ const { apiImgUrl } = useRuntimeConfig().public;
           <nuxt-img
             class="w-full h-full"
             :src="`${apiImgUrl}/w400${backdrop.file_path}`"
+            :loading="'lazy'"
           />
         </button>
       </div>

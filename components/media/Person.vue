@@ -19,6 +19,7 @@ const { apiImgUrl } = useRuntimeConfig().public;
           v-if="profilePath"
           class="w-full h-full rounded-lg object-fill aspect-[10/15]"
           :src="`${apiImgUrl}/w300_and_h450_bestv2${profilePath}`"
+          :loading="'lazy'"
         />
         <div v-else class="block bg-zinc-800 aspect-[10/15]">
           <div class="flex justify-center h-full p-2">

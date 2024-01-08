@@ -20,9 +20,6 @@ const swiperRef = ref();
 const swiperInited = ref(false);
 
 const onSwiperInit = () => (swiperInited.value = true);
-const mediaTypeRoute = computed(() => {
-  return props.mediaType === 'movie' ? 'movies' : 'series';
-});
 </script>
 
 <template>
@@ -46,7 +43,7 @@ const mediaTypeRoute = computed(() => {
           :title="media.title"
           :name="media.name"
           :vote-average="media.vote_average"
-          :mediaType="mediaTypeRoute"
+          :type="mediaType"
         />
       </SwiperSlide>
       <SwipersButtonPrev @slide-prev="slidePrev(swiperRef)" />

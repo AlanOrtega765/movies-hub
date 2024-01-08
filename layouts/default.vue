@@ -10,7 +10,7 @@ const links = ref([
 <template>
   <div class="flex">
     <header
-      class="fixed bottom-0 w-full lg:relative lg:w-fit z-30 bg-just-black lg:py-5 border-t-[1px] lg:border-t-0 border-gray/40 lg:border-r-[1px]"
+      class="fixed bottom-0 w-full lg:relative lg:w-fit z-30 bg-just-black border-t-[1px] lg:border-t-0 border-gray/40 lg:border-r-[1px]"
     >
       <nav class="relative lg:h-screen min-h-[80px] lg:min-w-[80px]">
         <ul

@@ -3,7 +3,6 @@ import type { Media } from '~/types';
 
 defineProps<{
   list: Media[];
-  mediaType: string;
 }>();
 
 const { slideNext, slidePrev } = useSwiperHelpers();
@@ -35,7 +34,7 @@ const onSwiperInit = () => (swiperInited.value = true);
             :title="media.title"
             :name="media.name"
             :vote-average="media.vote_average"
-            :media-type="mediaType"
+            :type="media.media_type"
           />
         </SwiperSlide>
         <SwipersButtonPrev @slide-prev="slidePrev(swiperRef)" />

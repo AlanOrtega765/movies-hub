@@ -62,12 +62,11 @@ const getMediaList = async () => {
 const scrollToTop = () => {
   window.scroll({
     top: 0,
-    behavior: 'smooth'
+    behavior: 'smooth',
   });
 };
 
 getMediaList();
-
 </script>
 
 <template>
@@ -90,7 +89,7 @@ getMediaList();
           :name="movie.name"
           :poster-path="movie.poster_path"
           :vote-average="movie.vote_average"
-          :mediaType="'movies'"
+          :type="'movie'"
         />
         <div
           ref="target"
@@ -105,8 +104,11 @@ getMediaList();
         </div>
       </div>
     </section>
-    <button class="fixed bottom-6 right-5 rounded-full border-4 opacity-30 hover:opacity-100 transition-opacity" @click="scrollToTop">
-      <Icon name="tabler:chevron-up" size="50"/>
+    <button
+      class="fixed bottom-6 right-5 rounded-full border-4 opacity-30 hover:opacity-100 transition-opacity"
+      @click="scrollToTop"
+    >
+      <Icon name="tabler:chevron-up" size="50" />
     </button>
   </div>
 </template>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Media } from '~/types';
+
 const { data }: any = await useFetch('/api/popular-movie-and-serie');
 
 const categoryList = ref([
@@ -8,7 +10,7 @@ const categoryList = ref([
   'Más valoradas',
 ]);
 
-const series: any = ref([]);
+const series = ref<Media[]>([]);
 const target = ref(null);
 const selected = ref(0);
 const actualPage = ref(0);
@@ -85,7 +87,7 @@ getMediaList();
           :name="serie.name"
           :poster-path="serie.poster_path"
           :vote-average="serie.vote_average"
-          :mediaType="'series'"
+          :type="'series'"
         />
         <div
           ref="target"
