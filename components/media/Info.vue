@@ -86,6 +86,6 @@ const production = computed(() => {
         <div>{{ production }}</div>
       </template>
     </ul>
-    <MediaExternalLinks :links="externalIds" />
+    <ExternalLinks :links="externalIds" />
   </article>
 </template>

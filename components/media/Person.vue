@@ -7,6 +7,7 @@ defineProps<{
 }>();
 
 const { apiImgUrl } = useRuntimeConfig().public;
+const { formatToSlug } = useUtils();
 </script>
 
 <template>
@@ -14,7 +15,7 @@ const { apiImgUrl } = useRuntimeConfig().public;
     <div
       class="px-2 py-2 bg-zinc-800 hover:scale-105 transition-transform rounded-lg"
     >
-      <NuxtLink class="relative overflow-hidden" to="#">
+      <NuxtLink class="relative overflow-hidden" :to="`/person/${id}-${formatToSlug(originalName)}`">
         <nuxt-img
           v-if="profilePath"
           class="w-full h-full rounded-lg object-fill aspect-[10/15]"

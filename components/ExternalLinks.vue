@@ -35,7 +35,7 @@ const imdbType = computed(() => {
     <li v-if="links.instagram_id">
       <NuxtLink
         class="text-gray hover:text-amber transition-colors"
-        :href="`https://intagram.com/${links.instagram_id}`"
+        :href="`https://instagram.com/${links.instagram_id}`"
         target="_blank"
       >
         <Icon name="lucide:instagram" size="24" />

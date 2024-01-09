@@ -8,6 +8,11 @@ const tabSelected = ref(1);
 const videoKey = ref<string | null>(null);
 const backdropPath = ref<string | null>(null);
 const posterPath = ref<string | null>(null);
+const tabs = ref([
+  { id: 1, text: 'Resumen' },
+  { id: 2, text: 'Videos' },
+  { id: 3, text: 'Imágenes' },
+]);
 </script>
 
 <template>
@@ -15,14 +20,15 @@ const posterPath = ref<string | null>(null);
     <MediaBanner :media="serie" />
     <div class="py-10">
       <section>
-        <MediaTabs
+        <Tabs
           :tab-selected="tabSelected"
           @select-tab="(id: number) => tabSelected = id"
+          :tabs="tabs"
         />
       </section>
       <section v-show="tabSelected === 1" class="mt-10 mx-auto">
         <div class="flex items-center gap-x-12 max-w-7xl mx-auto">
-          <MediaDetailCard :poster-path="serie.poster_path" />
+          <DetailCard :file-path="serie.poster_path" />
           <MediaInfo :media="serie" />
         </div>
         <SwipersMediaCast v-if="serie.credits" :cast="serie.credits?.cast" />

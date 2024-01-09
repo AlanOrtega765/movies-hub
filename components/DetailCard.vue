@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  posterPath: string;
+  filePath: string;
 }>();
 
 const { apiImgUrl } = useRuntimeConfig().public;
@@ -9,7 +9,7 @@ const { apiImgUrl } = useRuntimeConfig().public;
 <template>
   <nuxt-img
     class="h-[500px] rounded-lg object-cover shadow-md shadow-black"
-    :src="`${apiImgUrl}/w600_and_h900_bestv2${posterPath}`"
+    :src="`${apiImgUrl}/w600_and_h900_bestv2${filePath}`"
     :loading="'lazy'"
   />
 </template>

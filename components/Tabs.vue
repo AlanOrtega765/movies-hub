@@ -1,17 +1,17 @@
 <script setup lang="ts">
+interface Tab {
+  id: number;
+  text: string;
+}
+
 defineProps<{
   tabSelected: number;
+  tabs: Tab[];
 }>();
 
 const emits = defineEmits<{
   (e: 'selectTab', id: number): void;
 }>();
-
-const tabs = ref([
-  { id: 1, text: 'Resumen' },
-  { id: 2, text: 'Videos' },
-  { id: 3, text: 'Imágenes' },
-]);
 </script>
 
 <template>
