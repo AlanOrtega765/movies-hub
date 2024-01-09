@@ -4,6 +4,6 @@
 
 @layer base {
   body {
-    @apply font-poppins text-just-white;
+    @apply font-poppins text-just-white bg-jet-black;
   }
 }

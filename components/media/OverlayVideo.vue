@@ -13,7 +13,7 @@ const emits = defineEmits<{
     class="fixed top-0 left-0 w-full h-full flex justify-center items-center z-40 bg-black/80"
   >
     <youtube-player
-      class="w-[80%] h-[80%]"
+      class="w-full h-[40%] md:h-[50%] lg:w-[90%] lg:h-[60%] xl:w-[80%] xl:h-[80%]"
       :src="`https://www.youtube.com/embed?v=${videoKey}`"
       height="100%"
       width="100%"

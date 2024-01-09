@@ -37,7 +37,7 @@ const mediaType = computed(() => {
       </NuxtLink>
     </div>
     <div class="mt-4 text-sm lg:base">
-      <h1 class="lg:text-lg">{{ title || name }}</h1>
+      <h1 class="xl:text-lg">{{ title || name }}</h1>
       <Rating :vote-average="voteAverage" />
     </div>
   </div>

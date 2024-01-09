@@ -36,7 +36,7 @@ const swiperRef = ref();
             {{ media.title || media.name }}
           </h1>
           <div
-            class="flex flex-col lg:flex-row text-sm gap-y-2 lg:items-center text-gray"
+            class="flex flex-col lg:flex-row text-sm md:text-base 2xl:text-lg gap-y-2 lg:items-center text-gray"
           >
             <Rating :vote-average="media.vote_average" />
             <div class="hidden lg:block">
@@ -60,7 +60,7 @@ const swiperRef = ref();
               }}</span>
             </div>
           </div>
-          <p class="text-silver hidden lg:block">{{ media.overview }}</p>
+          <p class="text-silver hidden lg:block 2xl:text-lg">{{ media.overview }}</p>
         </div>
       </SwiperSlide>
       <SwipersButtonPrev

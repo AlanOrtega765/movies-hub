@@ -14,8 +14,8 @@ const tabs = ref([
 
 <template>
   <div v-if="person">
-    <div class="py-10">
-      <div class="flex gap-x-12 max-w-7xl mx-auto">
+    <div class="py-10 2xl:max-w-screen-2xl mx-auto px-4 lg:px-10">
+      <div class="flex flex-col lg:flex-row gap-x-4 xl:gap-x-12">
         <DetailCard :file-path="person.profile_path" />
         <PersonInfo :person="person" />
       </div>
@@ -27,8 +27,11 @@ const tabs = ref([
         />
       </section>
 
-      <section v-show="tabSelected === 1" class="mt-10 mx-auto px-20">
-        <div class="grid grid-cols-5 gap-6">
+      <section
+        v-show="tabSelected === 1"
+        class="mt-10"
+      >
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6">
           <div v-for="media in person.combined_credits?.cast" :key="media.id">
             <MediaCard
               :id="media.id"
@@ -44,7 +47,7 @@ const tabs = ref([
 
       <section
         v-show="tabSelected === 2"
-        class="px-20 mt-10 flex flex-col gap-y-10"
+        class="mt-10 flex flex-col gap-y-10"
       >
         <PersonPhotos
           v-if="person.images?.profiles"

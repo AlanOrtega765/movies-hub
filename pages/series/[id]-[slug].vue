@@ -18,7 +18,7 @@ const tabs = ref([
 <template>
   <div v-if="serie">
     <MediaBanner :media="serie" />
-    <div class="py-10">
+    <div class="py-10 2xl:max-w-screen-2xl mx-auto">
       <section>
         <Tabs
           :tab-selected="tabSelected"
@@ -26,14 +26,19 @@ const tabs = ref([
           :tabs="tabs"
         />
       </section>
-      <section v-show="tabSelected === 1" class="mt-10 mx-auto">
-        <div class="flex items-center gap-x-12 max-w-7xl mx-auto">
+      <section v-show="tabSelected === 1" class="mt-10 mx-auto px-4 lg:px-10">
+        <div
+          class="flex flex-col lg:flex-row items-center lg:items-start xl:items-center gap-x-4 xl:gap-x-12"
+        >
           <DetailCard :file-path="serie.poster_path" />
           <MediaInfo :media="serie" />
         </div>
         <SwipersMediaCast v-if="serie.credits" :cast="serie.credits?.cast" />
       </section>
-      <section v-show="tabSelected === 2" class="px-20 mt-10">
+      <section
+        v-show="tabSelected === 2"
+        class="mt-10 px-4"
+      >
         <MediaVideos
           v-if="serie.videos"
           :videos="serie.videos?.results"
@@ -42,7 +47,7 @@ const tabs = ref([
       </section>
       <section
         v-show="tabSelected === 3"
-        class="px-20 mt-10 flex flex-col gap-y-10"
+        class="mt-10 flex flex-col gap-y-10"
       >
         <MediaBackdrops
           v-if="serie.images?.backdrops"

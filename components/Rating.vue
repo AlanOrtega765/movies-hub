@@ -17,14 +17,14 @@ const { formatVoteAverage, getVotePercentage } = useUtils();
           v-for="i in 5"
           :key="i"
           class="text-amber min-w-[20px] min-h-[20px]"
-          name="material-symbols:star"
+          name="iconamoon:star-fill"
         />
       </div>
       <Icon
         v-for="i in 5"
         :key="i"
         class="text-amber"
-        name="material-symbols:star-outline"
+        name="iconamoon:star-light"
         size="20"
       />
     </div>

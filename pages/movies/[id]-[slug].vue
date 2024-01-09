@@ -18,7 +18,7 @@ const tabs = ref([
 <template>
   <div v-if="movie">
     <MediaBanner :media="movie" />
-    <div class="py-10">
+    <div class="py-10 2xl:max-w-screen-2xl mx-auto px-4 lg:px-10 xl:px-20">
       <section>
         <Tabs
           :tab-selected="tabSelected"
@@ -27,23 +27,22 @@ const tabs = ref([
         />
       </section>
       <section v-show="tabSelected === 1" class="mt-10 mx-auto">
-        <div class="flex items-center gap-x-12 max-w-7xl mx-auto">
+        <div
+          class="flex flex-col lg:flex-row items-center lg:items-start xl:items-center gap-x-4 xl:gap-x-12"
+        >
           <DetailCard :file-path="movie.poster_path" />
           <MediaInfo :media="movie" />
         </div>
         <SwipersMediaCast v-if="movie.credits" :cast="movie.credits?.cast" />
       </section>
-      <section v-show="tabSelected === 2" class="px-20 mt-10">
+      <section v-show="tabSelected === 2" class="mx-auto mt-10">
         <MediaVideos
           v-if="movie.videos"
           :videos="movie.videos?.results"
           @select-video="(key: string) => videoKey = key"
         />
       </section>
-      <section
-        v-show="tabSelected === 3"
-        class="px-20 mt-10 flex flex-col gap-y-10"
-      >
+      <section v-show="tabSelected === 3" class="mt-10 flex flex-col gap-y-10">
         <MediaBackdrops
           v-if="movie.images?.backdrops"
           :backdrops="movie.images?.backdrops"

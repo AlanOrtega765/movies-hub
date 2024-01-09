@@ -57,23 +57,25 @@ const throttledSearch = useDebounceFn(searchMedia, 500);
 
 <template>
   <div class="flex flex-col py-4">
-    <div class="px-10">
+    <div class="px-4 lg:px-10 xl:px-20">
       <div
-        class="flex items-center bg-just-black text-3xl gap-x-4 rounded-full px-10"
+        class="flex items-center bg-just-black text-xl lg:text-3xl gap-x-4 rounded-full px-10"
       >
         <Icon class="text-gray" name="iconamoon:search" size="32" />
         <input
-          class="w-full py-6 outline-none bg-transparent placeholder:text-gray"
+          class="w-full py-4 lg:py-6 outline-none bg-transparent placeholder:text-gray"
           type="text"
           placeholder="Buscar..."
           v-model="search"
         />
       </div>
     </div>
-    <div v-if="notResultsExisting" class="px-20 mt-10">
-      <h1 class="text-2xl">No se han encontrado resultados.</h1>
+    <div v-if="notResultsExisting" class="text-center mt-10">
+      <h1 class="text-base lg:text-2xl">No se han encontrado resultados.</h1>
     </div>
-    <div class="grid grid-cols-6 gap-10 px-20 mt-10">
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 lg:gap-10 px-4 lg:px-10 xl:px-20 mt-10"
+    >
       <div v-for="media in searchResult" :key="media.id">
         <MediaCard
           :poster-path="media.poster_path"

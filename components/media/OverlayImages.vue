@@ -16,9 +16,9 @@ const { apiImgUrl } = useRuntimeConfig().public;
   <div
     class="fixed top-0 left-0 w-full h-full flex justify-center items-center z-40 bg-black/80"
   >
-    <div class="w-auto h-[80%]" v-if="backdropPath">
+    <div class="w-full lg:w-auto lg:h-[60%] xl:h-[80%] 2xl:h-[80%]" v-if="backdropPath">
       <nuxt-img
-        class="w-full h-full object-cover"
+        class="w-full h-full object-fill"
         :src="`${apiImgUrl}/original${backdropPath}`"
       />
       <button
@@ -32,13 +32,13 @@ const { apiImgUrl } = useRuntimeConfig().public;
         />
       </button>
     </div>
-    <div v-if="posterPath" class="w-auto h-[90%]">
+    <div v-if="posterPath" class="w-full h-auto md:w-auto md:h-[80%] lg:h-[90%]">
       <nuxt-img
         class="w-full h-full object-fill"
         :src="`${apiImgUrl}/original${posterPath}`"
       />
       <button
-        class="absolute top-4 right-4 p-4 group"
+        class="absolute top-2 right-2 p-4 group"
         @click="emits('closePosterOverlay')"
       >
         <Icon

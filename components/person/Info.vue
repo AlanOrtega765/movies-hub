@@ -16,10 +16,10 @@ const externalIds = computed(() => ({
 </script>
 
 <template>
-  <article class="flex flex-col gap-y-6">
+  <article class="flex flex-col gap-y-6 mt-10 lg:mt-0">
     <h1 class="text-3xl">{{ person.name }}</h1>
-    <p v-if="person.biography" class="text-silver whitespace-pre-wrap">{{ person.biography }}</p>
-    <ul class="grid lg:grid-cols-[max-content_1fr] gap-3 text-sm text-silver">
+    <p class="text-silver whitespace-pre-wrap">{{ person.biography || '(Bibliografía no disponible.)' }}</p>
+    <ul class="grid md:grid-cols-[max-content_1fr] gap-3 text-sm text-silver">
       <template v-if="person.known_for_department">
         <div class="text-gray">Rol</div>
         <div>{{ person.known_for_department }}</div>

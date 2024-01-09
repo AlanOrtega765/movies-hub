@@ -14,13 +14,13 @@ const { apiImgUrl } = useRuntimeConfig().public;
   <div
     class="fixed top-0 left-0 w-full h-full flex justify-center items-center z-40 bg-black/80"
   >
-    <div class="w-auto h-[90%]">
+    <div class="w-full h-auto md:w-auto md:h-[80%] lg:h-[90%]">
       <nuxt-img
         class="w-full h-full object-fill"
         :src="`${apiImgUrl}/original${profilePath}`"
       />
       <button
-        class="absolute top-4 right-4 p-4 group"
+        class="absolute top-2 right-2 p-4 group"
         @click="emits('closeOverlay')"
       >
         <Icon

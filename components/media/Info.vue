@@ -27,22 +27,24 @@ const production = computed(() => {
 </script>
 
 <template>
-  <article class="flex flex-col gap-y-6">
-    <h1 class="text-3xl">{{ media.title || media.name }}</h1>
+  <article class="flex flex-col gap-y-6 mt-10 lg:mt-0">
+    <h1 class="text-3xl">
+      {{ media.title || media.name }}
+    </h1>
     <p class="text-silver">{{ media.overview }}</p>
     <ul
-      class="grid lg:grid-cols-[max-content_1fr_max-content_1fr] gap-3 text-sm text-silver"
+      class="grid grid-cols-[max-content_1fr] md:grid-cols-[max-content_1fr_max-content_1fr] gap-3 text-sm text-silver"
     >
       <template v-if="media.release_date">
-        <div>Lanzamiento</div>
+        <div class="text-gray">Lanzamiento</div>
         <div>{{ formatDate(media.release_date) }}</div>
       </template>
       <template v-if="media.runtime">
-        <div>Duración</div>
+        <div class="text-gray">Duración</div>
         <div>{{ formatRuntime(media.runtime) }}</div>
       </template>
       <template v-if="directors?.length">
-        <div>Director</div>
+        <div class="text-gray">Director</div>
         <div class="flex flex-wrap gap-1 h-fit">
           <NuxtLink
             class="bg-gray/10 px-2 py-1 rounded text-xs hover:bg-gray/20"
@@ -53,15 +55,15 @@ const production = computed(() => {
         </div>
       </template>
       <template v-if="media.budget">
-        <div>Presupuesto</div>
+        <div class="text-gray">Presupuesto</div>
         <div>{{ formatToCurrency(media.budget) }}</div>
       </template>
       <template v-if="media.revenue">
-        <div>Ingresos</div>
+        <div class="text-gray">Ingresos</div>
         <div>{{ formatToCurrency(media.revenue) }}</div>
       </template>
       <template v-if="media.genres?.length">
-        <div>Genero</div>
+        <div class="text-gray">Genero</div>
         <div class="flex flex-wrap gap-1 h-fit">
           <NuxtLink
             class="bg-gray/10 px-2 py-1 rounded text-xs hover:bg-gray/20"
@@ -72,17 +74,17 @@ const production = computed(() => {
         </div>
       </template>
       <template v-if="media.status">
-        <div>Estado</div>
+        <div class="text-gray">Estado</div>
         <div>{{ media.status }}</div>
       </template>
       <template v-if="media.original_language">
-        <div>Lenguaje</div>
+        <div class="text-gray">Lenguaje</div>
         <div>
           {{ languageByISO(media.original_language, languages) }}
         </div>
       </template>
       <template v-if="production?.length">
-        <div>Production</div>
+        <div class="text-gray">Production</div>
         <div>{{ production }}</div>
       </template>
     </ul>
