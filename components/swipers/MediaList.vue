@@ -23,20 +23,49 @@ const onSwiperInit = () => (swiperInited.value = true);
 </script>
 
 <template>
-  <section class="my-14 h-[550px]">
-    <h1 class="text-3xl ml-20">{{ title }}</h1>
+  <section class="lg:my-14 mb-10 h-auto px-4 lg:px-0">
+    <h1 class="text-lg lg:text-3xl lg:ml-20">{{ title }}</h1>
     <Swiper
       ref="swiperRef"
       class="transition-opacity mt-4"
       :class="swiperInited ? 'opacity-100' : 'opacity-0'"
-      :slides-per-view="6.5"
-      :slides-per-group="4"
       :space-between="10"
-      :centered-slides="true"
       :loop="true"
-      @init="onSwiperInit"
+      :breakpoints="{
+        320: {
+          slidesPerView: 2,
+          slidesPerGroup: 2,
+          centeredSlides: false,
+        },
+        640: {
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+          centeredSlides: false,
+        },
+        1024: {
+          slidesPerView: 4.5,
+          slidesPerGroup: 4,
+          centeredSlides: true,
+        },
+        1280: {
+          slidesPerView: 5.5,
+          slidesPerGroup: 4,
+          centeredSlides: true,
+        },
+        1536: {
+          slidesPerView: 6.5,
+          slidesPerGroup: 4,
+          centeredSlides: true,
+        },
+        2560: {
+          slidesPerView: 7.5,
+          slidesPerGroup: 4,
+          centeredSlides: true,
+        },
+      }"
+      @after-init="onSwiperInit"
     >
-      <SwiperSlide class="py-4" v-for="media in list" :key="media.id">
+      <SwiperSlide class="lg:py-4" v-for="media in list" :key="media.id">
         <MediaCard
           :id="media.id"
           :posterPath="media.poster_path"
@@ -46,8 +75,14 @@ const onSwiperInit = () => (swiperInited.value = true);
           :type="mediaType"
         />
       </SwiperSlide>
-      <SwipersButtonPrev @slide-prev="slidePrev(swiperRef)" />
-      <SwipersButtonNext @slide-next="slideNext(swiperRef)" />
+      <SwipersButtonPrev
+        class="hidden lg:block"
+        @slide-prev="slidePrev(swiperRef)"
+      />
+      <SwipersButtonNext
+        class="hidden lg:block"
+        @slide-next="slideNext(swiperRef)"
+      />
     </Swiper>
   </section>
 </template>

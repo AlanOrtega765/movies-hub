@@ -20,12 +20,14 @@ const mediaList = ref([
 <template>
   <div>
     <SwipersBanners />
-    <SwipersMediaList
-      v-for="media in mediaList"
-      :key="media.title"
-      :title="media.title"
-      :media-type="media.mediaType"
-      :media-list="media.mediaList"
-    />
+    <div class="pt-10">
+      <SwipersMediaList
+        v-for="media in mediaList"
+        :key="media.title"
+        :title="media.title"
+        :media-type="media.mediaType"
+        :media-list="media.mediaList"
+      />
+    </div>
   </div>
 </template>

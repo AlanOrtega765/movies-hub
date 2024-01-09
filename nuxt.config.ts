@@ -16,11 +16,8 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
   ],
-  routeRules: {
-    '/': { prerender: true },
-  },
   swiper: {
-    modules: ['free-mode'],
+    modules: ['pagination'],
   },
   googleFonts: {
     families: {

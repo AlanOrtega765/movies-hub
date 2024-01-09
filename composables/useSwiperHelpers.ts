@@ -7,5 +7,9 @@ export const useSwiperHelpers = () => {
     swiper.$el.swiper.slideNext();
   };
 
+  const breakpoints = () => {
+    
+  }
+
   return { slidePrev, slideNext };
 };

@@ -19,7 +19,7 @@ const mediaType = computed(() => {
 <template>
   <div>
     <div
-      class="w-full px-2 py-2 bg-zinc-800 hover:scale-105 transition-transform rounded-lg"
+      class="w-full px-2 py-2 bg-zinc-800 lg:hover:scale-105 transition-transform rounded-lg"
     >
       <NuxtLink
         class="relative"
@@ -27,7 +27,7 @@ const mediaType = computed(() => {
       >
         <nuxt-img
           v-if="posterPath"
-          class="w-full rounded-lg object-cover aspect-[10/15]"
+          class="w-full rounded-lg object-fill aspect-[10/15] max-h-[330px] lg:max-h-[350px] xl:max-h-[350px] 2xl:max-h-[500px]"
           :src="`${apiImgUrl}/w600_and_h900_bestv2${posterPath}`"
           :loading="'lazy'"
         />
@@ -36,8 +36,8 @@ const mediaType = computed(() => {
         </div>
       </NuxtLink>
     </div>
-    <div class="mt-4">
-      <h1 class="text-lg">{{ title || name }}</h1>
+    <div class="mt-4 text-sm lg:base">
+      <h1 class="lg:text-lg">{{ title || name }}</h1>
       <Rating :vote-average="voteAverage" />
     </div>
   </div>

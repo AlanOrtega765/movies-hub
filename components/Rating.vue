@@ -7,7 +7,7 @@ const { formatVoteAverage, getVotePercentage } = useUtils();
 </script>
 
 <template>
-  <div class="flex gap-x-1">
+  <div class="flex items-center gap-x-1">
     <div class="relative flex">
       <div
         class="absolute top-0 left-0 overflow-hidden flex"
