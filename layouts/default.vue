@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const route = useRoute();
 const links = ref([
   { id: 1, route: '/', icon: 'ant-design:home-outlined' },
   { id: 2, route: '/movies', icon: 'material-symbols:movie-outline' },
@@ -31,7 +32,7 @@ const links = ref([
       <main>
         <slot />
       </main>
-      <footer class="flex flex-col gap-y-4 px-4 py-10 lg:p-10 bg-black">
+      <footer v-if="route.path === '/'" class="flex flex-col gap-y-4 px-4 py-10 lg:p-10 bg-black">
         <NuxtLink to="/" class="flex items-center w-fit gap-x-2">
           <nuxt-img src="/img/logo.png" width="50" height="45" />
           <span class="font-montserrat-alternates font-bold text-lg"
