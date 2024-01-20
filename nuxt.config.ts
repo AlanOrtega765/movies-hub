@@ -26,6 +26,9 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
   ],
+  images: {
+    provider: 'netlify'
+  },
   routeRules: {
     '/**': isDev
       ? {
