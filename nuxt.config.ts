@@ -34,13 +34,6 @@ export default defineNuxtConfig({
       ]
     }
   },
-  routeRules: {
-    '/**': isDev
-      ? {
-          cache: { swr: true, maxAge: 120, staleMaxAge: 60, headersOnly: true },
-        }
-      : {},
-  },
   swiper: {
     modules: ['pagination'],
   },
