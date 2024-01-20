@@ -26,8 +26,13 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
   ],
-  image: {
-    provider: 'netlify'
+  nitro: {
+    prerender: {
+      routes: [
+        '/_ipx/f_webp/img/logo.png',
+        '/_ipx/f_webp/img/tmdb.svg',
+      ]
+    }
   },
   routeRules: {
     '/**': isDev
