@@ -27,11 +27,31 @@ const links = ref([
         </ul>
       </nav>
     </header>
-    <div class="overflow-hidden w-full pb-[80px]">
+    <div class="overflow-hidden w-full pb-[80px] lg:pb-0">
       <main>
         <slot />
       </main>
-      <footer></footer>
+      <footer class="flex flex-col gap-y-4 px-4 py-10 lg:p-10 bg-black">
+        <NuxtLink to="/" class="flex items-center w-fit gap-x-2">
+          <nuxt-img src="/img/logo.png" width="50" height="45" />
+          <span class="font-montserrat-alternates font-bold text-lg"
+            >Movies Hub</span
+          >
+        </NuxtLink>
+        <div class="flex items-center gap-x-2 text-sm text-white/50 mt-2">
+          <span>Desarrollado con</span>
+          <NuxtLink href="https://nuxt.com/" target="_blank">
+            <IconsNuxt class="w-20 h-auto" />
+          </NuxtLink>
+        </div>
+        <div class="flex items-center gap-x-2 text-sm text-white/50">
+          <span>Datos distribuidos por</span>
+          <NuxtLink href="https://nuxt.com/" target="_blank">
+            <NuxtImg src="/img/tmdb.svg" width="100" />
+          </NuxtLink>
+        </div>
+        <h5 class="text-white/50 text-sm">Este proyecto utiliza la API de TMDB, pero no está avalado ni certificado por TMDB.</h5>
+      </footer>
     </div>
   </div>
 </template>
