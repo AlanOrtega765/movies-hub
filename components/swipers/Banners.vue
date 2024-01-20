@@ -48,8 +48,8 @@ const swiperRef = ref();
                 <Icon name="ph:dot" />
               </div>
               <span>{{
-                formatDate(media.release_date) ||
-                formatDate(media.first_air_date)
+                formatDate(media.release_date)?.split('/')[2] ||
+                formatDate(media.first_air_date)?.split('/')[2]
               }}</span>
               <div>
                 <Icon name="ph:dot" />
