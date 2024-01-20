@@ -18,7 +18,7 @@ const tabs = ref([
 <template>
   <div v-if="serie">
     <MediaBanner :media="serie" />
-    <div class="py-10 2xl:max-w-screen-2xl mx-auto">
+    <div class="py-10 2xl:max-w-screen-2xl mx-auto px-4">
       <section>
         <Tabs
           :tab-selected="tabSelected"
