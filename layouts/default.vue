@@ -47,7 +47,7 @@ const links = ref([
         </div>
         <div class="flex items-center gap-x-2 text-sm text-white/50">
           <span>Datos distribuidos por</span>
-          <NuxtLink href="https://nuxt.com/" target="_blank">
+          <NuxtLink href="https://www.themoviedb.org/" target="_blank">
             <img src="/img/tmdb.svg" width="100" />
           </NuxtLink>
         </div>
