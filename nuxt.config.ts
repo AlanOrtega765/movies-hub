@@ -26,11 +26,6 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
   ],
-  nitro: {
-    prerender: {
-      routes: ['/_ipx/f_webp/img/logo.png', '/_ipx/f_webp/img/tmdb.svg'],
-    },
-  },
   image: {
     format: ['webp'],
     quality: 80,
