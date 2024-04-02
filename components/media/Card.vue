@@ -8,7 +8,7 @@ const props = defineProps<{
   type: string
 }>()
 
-const { apiImgUrl } = useRuntimeConfig().public
+// const { apiImgUrl } = useRuntimeConfig().public
 const { formatToSlug } = useUtils()
 
 const mediaType = computed(() => {
@@ -28,7 +28,7 @@ const mediaType = computed(() => {
         <NuxtImg
           v-if="posterPath"
           class="w-full rounded-lg object-fill aspect-[10/15] max-h-[330px] lg:max-h-[350px] xl:max-h-[350px] 2xl:max-h-[500px]"
-          :src="`${apiImgUrl}/w600_and_h900_bestv2${posterPath}`"
+          :src="`/w600_and_h900_bestv2${posterPath}`"
           :loading="'lazy'"
           :quality="10"
           :format="'webp'"
