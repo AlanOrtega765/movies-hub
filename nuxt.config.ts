@@ -1,4 +1,4 @@
-const isDev = process.env.NODE_ENV === 'production';
+const isDev = process.env.NODE_ENV === 'production'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -28,11 +28,14 @@ export default defineNuxtConfig({
   ],
   nitro: {
     prerender: {
-      routes: [
-        '/_ipx/f_webp/img/logo.png',
-        '/_ipx/f_webp/img/tmdb.svg',
-      ]
-    }
+      routes: ['/_ipx/f_webp/img/logo.png', '/_ipx/f_webp/img/tmdb.svg'],
+    },
+  },
+  image: {
+    format: ['webp'],
+    quality: 80,
+    domains: ['https://image.tmdb.org/'],
+    provider: 'netlify',
   },
   swiper: {
     modules: ['pagination'],
@@ -43,4 +46,4 @@ export default defineNuxtConfig({
       'Montserrat Alternates': [700],
     },
   },
-});
+})

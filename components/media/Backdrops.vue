@@ -27,11 +27,13 @@ const { apiImgUrl } = useRuntimeConfig().public;
         :key="index"
         @click="emits('selectBackdrop', backdrop.file_path)"
       >
-        <nuxt-img
+        <NuxtImg
           v-if="backdrop.file_path"
           class="w-full h-full"
           :src="`${apiImgUrl}/w400${backdrop.file_path}`"
           :loading="'lazy'"
+          :format="'web'"
+          :quality="80"
         />
       </button>
     </div>

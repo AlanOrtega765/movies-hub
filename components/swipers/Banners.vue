@@ -23,9 +23,11 @@ const swiperRef = ref();
       }"
     >
       <SwiperSlide v-for="media in popularMovieAndSerie" :key="media.id">
-        <nuxt-img
+        <NuxtImg
           class="lg:w-[70%] h-[70%] lg:h-full object-cover w-full lg:ml-auto"
           :src="`${apiImgUrl}/w1920_and_h800_multi_faces${media.backdrop_path}`"
+          :format="'webp'"
+          :quality="80"
         />
         <div
           class="absolute bottom-0 lg:top-0 left-0 lg:w-[70%] w-full lg:h-full flex flex-col lg:gap-y-4 lg:justify-center justify-end pb-14 lg:pb-0 px-4 lg:px-20 h-[70%] bg-gradient-to-t lg:bg-gradient-to-r from-just-black via-just-black to-transparent"

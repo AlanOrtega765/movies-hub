@@ -1,19 +1,19 @@
 <script setup lang="ts">
 const props = defineProps<{
-  id: number;
-  posterPath: string | null;
-  title?: string;
-  name?: string;
-  voteAverage: number;
-  type: string;
-}>();
+  id: number
+  posterPath: string | null
+  title?: string
+  name?: string
+  voteAverage: number
+  type: string
+}>()
 
-const { apiImgUrl } = useRuntimeConfig().public;
-const { formatToSlug } = useUtils();
+const { apiImgUrl } = useRuntimeConfig().public
+const { formatToSlug } = useUtils()
 
 const mediaType = computed(() => {
-  return props.type === 'movie' ? 'movies' : 'series';
-});
+  return props.type === 'movie' ? 'movies' : 'series'
+})
 </script>
 
 <template>
@@ -25,11 +25,13 @@ const mediaType = computed(() => {
         class="relative"
         :to="`/${mediaType}/${id}-${formatToSlug(title || name)}`"
       >
-        <nuxt-img
+        <NuxtImg
           v-if="posterPath"
           class="w-full rounded-lg object-fill aspect-[10/15] max-h-[330px] lg:max-h-[350px] xl:max-h-[350px] 2xl:max-h-[500px]"
           :src="`${apiImgUrl}/w600_and_h900_bestv2${posterPath}`"
           :loading="'lazy'"
+          :quality="10"
+          :format="'webp'"
         />
         <div v-else class="flex justify-center p-2 aspect-[10/15]">
           <Icon class="text-gray" name="iconoir:file-not-found" size="40" />

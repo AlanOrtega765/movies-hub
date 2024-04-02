@@ -20,15 +20,17 @@ const { apiImgUrl } = useRuntimeConfig().public;
     </h5>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-4">
       <button
-        class="lg:hover:scale-105 transition-transform aspect-[10/14]"
+        class="lg:hover:scale-105 transition-transform aspect-[10/15]"
         v-for="(poster, index) in posters"
         :key="index"
         @click="emits('selectPoster', poster.file_path)"
       >
-        <nuxt-img
+        <NuxtImg
           class="w-full h-full"
           :src="`${apiImgUrl}/w400${poster.file_path}`"
           :loading="'lazy'"
+          :quality="80"
+          :format="'webp'"
         />
       </button>
     </div>
