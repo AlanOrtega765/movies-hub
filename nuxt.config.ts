@@ -29,7 +29,7 @@ export default defineNuxtConfig({
   image: {
     format: ['webp'],
     quality: 80,
-    domains: ['https://image.tmdb.org/'],
+    // domains: ['https://image.tmdb.org/'],
     provider: 'netlify',
   },
   swiper: {
