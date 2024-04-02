@@ -34,9 +34,6 @@ export default defineNuxtConfig({
       myProvider: {
         name: 'Tmdb',
         provider: '~/providers/my-provider.ts',
-        options: {
-          baseURL: 'https://image.tmdb.org/',
-        },
       },
     },
     provider: 'Tmdb',
