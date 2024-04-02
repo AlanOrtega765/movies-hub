@@ -30,7 +30,16 @@ export default defineNuxtConfig({
     format: ['webp'],
     quality: 80,
     // domains: ['https://image.tmdb.org/'],
-    provider: 'netlify',
+    providers: {
+      myProvider: {
+        name: 'Tmdb',
+        provider: '~/providers/my-provider.ts',
+        options: {
+          baseURL: 'https://image.tmdb.org/',
+        },
+      },
+    },
+    provider: 'Tmdb',
   },
   swiper: {
     modules: ['pagination'],
