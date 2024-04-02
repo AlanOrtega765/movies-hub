@@ -12,9 +12,9 @@ const swiperRef = ref();
 </script>
 
 <template>
-  <section class="relative h-[50vh] lg:h-[70vh]">
+  <section class="relative">
     <Swiper
-      class="h-full"
+      class="h-auto aspect-[9/8] md:aspect-[10/8] lg:aspect-[10/7] xl:aspect-[10/5] 2xl:aspect-[10/4]"
       ref="swiperRef"
       :modules="[SwiperPagination]"
       :pagination="{
@@ -24,7 +24,7 @@ const swiperRef = ref();
     >
       <SwiperSlide v-for="media in popularMovieAndSerie" :key="media.id">
         <NuxtImg
-          class="lg:w-[70%] h-[70%] lg:h-full object-cover w-full lg:ml-auto"
+          class="lg:w-[70%] h-[70%] lg:h-full object-cover object-left w-full lg:ml-auto"
           :src="`${apiImgUrl}/w1920_and_h800_multi_faces${media.backdrop_path}`"
           :format="'webp'"
           :quality="80"
